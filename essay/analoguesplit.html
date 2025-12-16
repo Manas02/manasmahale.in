@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analogue Split — Manas Mahale</title>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+
+        :root {
+            --bg: #F5F4EF;
+            --ink: #111111;
+            --subtle: #888888;
+            --accent: #D93025;
+            --border: #E0E0E0;
+        }
+
+        /* --- Base & Typography --- */
+        ::selection { background: var(--accent); color: var(--bg); }
+        ::-moz-selection { background: var(--accent); color: var(--bg); }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; cursor: default; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--ink);
+            min-height: 100vh;
+            width: 100vw;
+            font-family: 'Instrument Serif', serif;
+            padding: 4rem;
+            overflow-x: hidden;
+            line-height: 1.4;
+        }
+
+        /* --- Navigation --- */
+        nav {
+            position: absolute;
+            top: 4rem;
+            right: 4rem;
+            display: flex;
+            gap: 2rem;
+            z-index: 10;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--subtle);
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--accent);
+            font-style: italic;
+        }
+
+        /* --- Header --- */
+        header {
+            margin-bottom: 6rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+            color: var(--ink);
+            line-height: 1.1;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--subtle);
+            font-style: italic;
+            margin-top: 1rem;
+        }
+
+        /* --- Article Layout --- */
+        article {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.5rem;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            font-weight: 400;
+            color: var(--ink);
+            margin-top: 4rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        /* Epigraph Style */
+        .epigraph {
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--subtle);
+            border-left: 2px solid var(--accent);
+            padding-left: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .epigraph p { margin-bottom: 0.75rem; }
+
+        /* Images */
+        .article-image {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            margin: 2rem 0;
+            border: 1px solid var(--border);
+        }
+
+        /* Links & Citations */
+        a {
+            color: var(--ink);
+            text-decoration: underline;
+            text-decoration-color: var(--accent);
+            text-underline-offset: 4px;
+        }
+        a:hover { color: var(--accent); }
+
+        .citation-ref {
+            font-size: 0.9rem;
+            vertical-align: super;
+            text-decoration: none;
+            color: var(--accent);
+            margin-left: 2px;
+        }
+
+        /* References Section */
+        .references {
+            margin-top: 6rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--ink);
+            font-size: 1.1rem;
+            color: var(--subtle);
+        }
+        
+        .references h3 {
+            font-size: 1.3rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: var(--ink);
+        }
+
+        .ref-item {
+            margin-bottom: 0.75rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .ref-num { min-width: 1.5rem; color: var(--accent); }
+        .ref-link { color: var(--subtle); text-decoration: none; border-bottom: 1px solid var(--border); }
+        .ref-link:hover { color: var(--accent); border-color: var(--accent); }
+
+        /* --- Mobile --- */
+        @media (max-width: 768px) {
+
+        body { 
+        padding: 1.5rem 1rem; 
+        }
+        
+        nav { 
+        position: static; 
+        margin-bottom: 3rem; 
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 1rem;
+        }
+
+        h1 { 
+        font-size: 2.2rem; 
+        }
+
+        .subtitle {
+        font-size: 1.2rem;
+        }
+
+        article { 
+        font-size: 1.15rem; 
+        line-height: 1.5;
+        }
+
+        p {
+        text-align: left; /* Crucial for mobile legibility */
+        }
+
+        .epigraph {
+        padding-left: 1rem;
+        font-size: 1.1rem;
+        }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="../essay.html" class="nav-link active">Essays</a>
+        <a href="../marginalia.html" class="nav-link">Marginalia</a>
+        <a href="../contact.html" class="nav-link">Contact</a>
+    </nav>
+
+    <header>
+        <h1>Analogue Split</h1>
+        <div class="subtitle">A Chemically Biased Parametric Data Splitting Method</div>
+        <div style="margin-top: 1.5rem; font-size: 1.1rem;">
+            <a href="https://github.com/Manas02/analogue-split" style="margin-right: 1rem;">GitHub</a>
+            <a href="https://pypi.org/project/analoguesplit/">PyPI</a>
+        </div>
+    </header>
+
+    <article>
+        <div class="epigraph">
+            <p>The officer Lu Hsuan once said to Master Nan Ch'uan: “Heaven, earth, and I have the same root; myriad things and I are one body. This is quite marvelous.”</p>
+            <p>Nan Ch'uan pointed to a flower in the garden and replied, “People these days see this flower as a dream.”</p>
+        </div>
+
+        <p>
+            In machine learning for cheminformatics, we often mistake the map for the territory. Random data splits are the standard for training and validation. While this approach appears objective, it lacks control over the biases inherent in chemical datasets.<a href="#ref-1" class="citation-ref">[1-3]</a>
+        </p>
+
+        <h2>The Problem of Randomness</h2>
+        <p>
+            Biases—such as the relationship between structural similarity and bioactivity<a href="#ref-4" class="citation-ref">[4]</a>, or the presence of <i>activity cliffs</i> (where small structural changes cause large bioactivity differences)<a href="#ref-5" class="citation-ref">[5]</a>—significantly influence model training. A random split obscures these critical factors, limiting our understanding of model performance under real-world conditions.
+        </p>
+
+        <img src="https://raw.githubusercontent.com/Manas02/analogue-split/main/banner.png" alt="Analogue Split Mechanism" class="article-image">
+
+        <p>
+            Analogue Split addresses this by introducing a controlled, biased splitting mechanism using a parameter, <i>γ</i> (gamma), to adjust test set composition. This approach creates a series of test sets that are explicitly designed to stress-test the model's ability to handle <i>within</i>-series and <i>between</i>-series predictions.
+        </p>
+
+        <p>
+            <i>But a rigorous test requires a rigorous yardstick; creating a harder challenge is futile if we measure success with a broken ruler.</i>
+        </p>
+
+        <p>
+            Gross performance metrics like accuracy and F1 score can be deceptive.<a href="#ref-6" class="citation-ref">[6]</a> I advocate for biased validation because models are only as good as the data they are validated against. With Analogue Split, we take a step closer to selecting models that don't just perform well, but perform meaningfully. After all, in practice, it is not about being right; it is about being useful.
+        </p>
+
+        <div class="references">
+            <h3>References</h3>
+            
+            <div class="ref-item" id="ref-1">
+                <span class="ref-num">[1]</span>
+                <a href="https://arxiv.org/pdf/2406.00873" class="ref-link">Guo et al. 2024</a>
+            </div>
+            
+            <div class="ref-item" id="ref-2">
+                <span class="ref-num">[2]</span>
+                <a href="https://practicalcheminformatics.blogspot.com/2024/11/some-thoughts-on-splitting-chemical.html" class="ref-link">Walters 2024</a>
+            </div>
+
+            <div class="ref-item" id="ref-3">
+                <span class="ref-num">[3]</span>
+                <a href="https://pubs.acs.org/doi/abs/10.1021/ci400084k" class="ref-link">Sheridan 2013</a>
+            </div>
+
+            <div class="ref-item" id="ref-4">
+                <span class="ref-num">[4]</span>
+                <a href="https://pubmed.ncbi.nlm.nih.gov/12213076/" class="ref-link">Martin et al. 2002</a>
+            </div>
+
+            <div class="ref-item" id="ref-5">
+                <span class="ref-num">[5]</span>
+                <a href="https://pubs.acs.org/doi/10.1021/acsomega.9b02221" class="ref-link">Stumpfe et al. 2019</a>
+            </div>
+
+            <div class="ref-item" id="ref-6">
+                <span class="ref-num">[6]</span>
+                <a href="https://arxiv.org/pdf/1503.06410" class="ref-link">Powers et al. 2015</a>
+            </div>
+
+            <h3 style="margin-top: 2rem;">Acknowledgements</h3>
+            <p>
+                Special thanks to Andreas Bender, Daniel Svozil, Martin Sicho, Wim Dehaen, Ivan Čmelo, Srijit Seal, and Yoann Gloaguen for inspiring and shaping these ideas.
+            </p>
+        </div>
+
+    </article>
+
+</body>
+</html>

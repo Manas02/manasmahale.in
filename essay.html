@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Essays — Manas Mahale</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+
+        :root {
+            --bg: #F5F4EF;
+            --ink: #111111;
+            --subtle: #888888;
+            --accent: #D93025;
+            --border: #E0E0E0; /* Light line for separation */
+        }
+
+        /* --- Selection Styling --- */
+        ::selection { background: var(--accent); color: var(--bg); }
+        ::-moz-selection { background: var(--accent); color: var(--bg); }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; cursor: default; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--ink);
+            min-height: 100vh;
+            width: 100vw;
+            font-family: 'Instrument Serif', serif;
+            padding: 4rem;
+            overflow-x: hidden;
+        }
+
+        /* --- Navigation (Simplified for sub-pages) --- */
+        nav {
+            position: absolute;
+            top: 4rem;
+            right: 4rem;
+            display: flex;
+            gap: 2rem;
+            z-index: 10;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--subtle);
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--accent);
+            font-style: italic;
+        }
+
+        /* --- Header --- */
+        header {
+            margin-bottom: 6rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+            color: var(--ink);
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--subtle);
+            font-style: italic;
+        }
+
+        /* --- The Journal Ledger --- */
+        .journal-list {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .entry {
+            display: grid;
+            /* Date | Title | Category */
+            grid-template-columns: 120px 1fr 150px; 
+            align-items: baseline;
+            padding: 1.5rem 0;
+            border-top: 1px solid var(--border);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .entry:last-child {
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* Column Styles */
+        .entry-date {
+            font-size: 1.1rem;
+            color: var(--subtle);
+            font-feature-settings: "tnum"; /* Tabular numbers for alignment */
+        }
+
+        .entry-title {
+            font-size: 2rem;
+            color: var(--ink);
+            font-weight: 400;
+            padding-right: 2rem;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        .entry-tag {
+            font-size: 1.1rem;
+            color: var(--subtle);
+            text-align: right;
+            font-style: italic;
+        }
+
+        /* Hover Effects */
+        .entry:hover .entry-title {
+            color: var(--accent);
+            font-style: italic;
+            transform: translateX(10px);
+        }
+
+        .entry:hover .entry-date, 
+        .entry:hover .entry-tag {
+            color: var(--ink); /* Darken meta data on hover */
+        }
+
+        /* --- Mobile --- */
+        @media (max-width: 768px) {
+            body { padding: 2rem; }
+            nav { position: static; margin-bottom: 4rem; justify-content: flex-start;}
+            header { margin-bottom: 3rem; }
+            
+            .entry {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+            
+            .entry-date { font-size: 0.9rem; }
+            .entry-title { font-size: 1.8rem; padding-right: 0;}
+            .entry-tag { text-align: left; font-size: 0.9rem; }
+            
+            .entry:hover .entry-title { transform: translateX(5px); }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="fade-in">
+        <a href="./index.html" class="nav-link">Home</a>
+        <a href="./marginalia.html" class="nav-link">Marginalia</a>
+        <a href="./contact.html" class="nav-link">Contacts</a>
+    </nav>
+
+    <header class="fade-in">
+        <h1>Essays</h1>
+        <div class="subtitle">Some Ideas Worth Pondering</div>
+    </header>
+
+    <main class="journal-list fade-in">
+        
+        <a href="./essay/analoguesplit.html" class="entry">
+            <span class="entry-date">2024.06.20</span>
+            <span class="entry-title">Analogue Split: Biased Chemical Data Splitting</span>
+            <span class="entry-tag">Research</span>
+        </a>
+        
+    </main>
+
+    <script>
+        // Simple fade-in script (same as homepage logic)
+        document.querySelectorAll('.fade-in').forEach((el, index) => {
+            el.style.opacity = '0';
+            el.style.animation = `fadeIn 1s ease-out forwards ${index * 0.1}s`;
+        });
+    </script>
+
+    <style>
+        @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+        .fade-in { transform: translateY(20px); }
+    </style>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marginalia — Manas Mahale</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500&display=swap'); /* Added Sans for code/technical bits if needed, or just fallback */
+
+        :root {
+            --bg: #F5F4EF;
+            --ink: #111111;
+            --subtle: #888888;
+            --accent: #D93025;
+            --code-bg: #EAE8E0;
+            --border: #E0E0E0;
+        }
+
+        /* --- Selection Styling --- */
+        ::selection { background: var(--accent); color: var(--bg); }
+        ::-moz-selection { background: var(--accent); color: var(--bg); }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; cursor: default; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--ink);
+            min-height: 100vh;
+            width: 100vw;
+            font-family: 'Instrument Serif', serif;
+            padding: 4rem;
+            overflow-x: hidden;
+        }
+
+        /* --- Navigation --- */
+        nav {
+            position: absolute;
+            top: 4rem;
+            right: 4rem;
+            display: flex;
+            gap: 2rem;
+            z-index: 10;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--subtle);
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--accent);
+            font-style: italic;
+        }
+
+        /* --- Header --- */
+        header {
+            margin-bottom: 6rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+            color: var(--ink);
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--subtle);
+            font-style: italic;
+            max-width: 600px;
+        }
+
+        /* --- The Logbook Layout --- */
+        .notes-feed {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            gap: 4rem; /* Space between notes */
+        }
+
+        .note-item {
+            display: grid;
+            grid-template-columns: 160px 1fr; /* Metadata | Content */
+            gap: 2rem;
+            align-items: flex-start;
+            padding-bottom: 4rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .note-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Metadata Column */
+        .note-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            font-size: 1.1rem;
+            color: var(--subtle);
+            position: sticky;
+            top: 4rem; /* Keeps date visible on long notes */
+        }
+
+        .note-tag {
+            color: var(--accent);
+            font-style: italic;
+        }
+
+        /* Content Column */
+        .note-content {
+            font-size: 1.6rem;
+            line-height: 1.4;
+            color: var(--ink);
+            max-width: 700px;
+        }
+
+        .note-content p {
+            margin-bottom: 1rem;
+        }
+
+        /* Code Snippet Styling */
+        code {
+            font-family: 'Instrument Sans', sans-serif; /* Or courier */
+            font-size: 0.85em;
+            background-color: var(--code-bg);
+            padding: 0.1em 0.4em;
+            border-radius: 4px;
+            color: var(--ink);
+        }
+
+        /* --- Mobile --- */
+        @media (max-width: 768px) {
+            body { padding: 2rem; }
+            nav { position: static; margin-bottom: 4rem; justify-content: flex-start;}
+            header { margin-bottom: 3rem; }
+            
+            .note-item {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+                padding-bottom: 3rem;
+            }
+
+            .note-meta {
+                flex-direction: row;
+                gap: 1rem;
+                position: static;
+                font-size: 0.9rem;
+            }
+
+            .note-content {
+                font-size: 1.3rem;
+            }
+        }
+        .highlight-link {
+            color: var(--accent); 
+            text-decoration: none; 
+            font-style: italic;
+            padding: 0 4px;     
+            margin: 0 -4px;     
+            border-radius: 4px; 
+            transition: background-color 0.2s ease, color 0.2s ease;
+            position: relative; 
+            z-index: 10;
+        }
+
+        .highlight-link:hover { 
+            background-color: var(--accent); 
+            color: var(--bg); 
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="fade-in">
+        <a href="./index.html" class="nav-link">Home</a>
+        <a href="./essay.html" class="nav-link">Essays</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+
+    <header class="fade-in">
+        <h1>Marginalia</h1>
+        <div class="subtitle">
+          Minor epiphanies.
+        </div>
+    </header>
+
+    <main class="notes-feed fade-in">
+       <article class="note-item">
+            <div class="note-meta">
+                <span>2025.12.16</span>
+                <span class="note-tag">#chemistry</span>
+            </div>
+            <div class="note-content">
+                <p>
+                    Loved reading this <a href="https://chemistry.illinois.edu/anecdotal-history-chemistry-prior-1950" class="highlight-link">Anecdotal History of Chemistry</a>. It captures the human side of the science beautifully.
+                </p>
+            </div>
+        </article>
+
+        <article class="note-item">
+            <div class="note-meta">
+                <span>2025.12.15</span>
+                <span class="note-tag">#reading</span>
+            </div>
+            <div class="note-content">
+                <p>
+                    Enjoyed reading about Woodward-Hoffmann rules by none other than Subramania Ranganathan. You can find the <a href="https://www.ias.ac.in/article/fulltext/reso/016/12/1211-1222" class="highlight-link">full text here</a>.
+                </p>
+            </div>
+        </article>
+        </main>
+
+    <script>
+        document.querySelectorAll('.fade-in').forEach((el, index) => {
+            el.style.opacity = '0';
+            el.style.animation = `fadeIn 1s ease-out forwards ${index * 0.1}s`;
+        });
+    </script>
+
+    <style>
+        @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+        .fade-in { transform: translateY(20px); }
+    </style>
+</body>
+</html>

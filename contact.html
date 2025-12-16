@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact — Manas Mahale</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+
+        :root {
+            --bg: #F5F4EF;
+            --ink: #111111;
+            --subtle: #888888;
+            --accent: #D93025; /* Editorial Red */
+            --border: #E0E0E0;
+        }
+
+        /* --- Selection Styling --- */
+        ::selection { background: var(--accent); color: var(--bg); }
+        ::-moz-selection { background: var(--accent); color: var(--bg); }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; cursor: default; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--ink);
+            min-height: 100vh;
+            width: 100vw;
+            font-family: 'Instrument Serif', serif;
+            padding: 4rem;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden; /* Added for consistency */
+        }
+
+        /* --- Navigation --- */
+        nav {
+            position: absolute;
+            top: 4rem;
+            right: 4rem;
+            display: flex;
+            gap: 2rem;
+            z-index: 10;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--subtle);
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--accent);
+            font-style: italic;
+        }
+
+        /* --- Header --- */
+        header {
+            margin-bottom: 6rem; /* Aligned with other pages */
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+            color: var(--ink);
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--subtle);
+            font-style: italic;
+            max-width: 600px;
+            line-height: 1.3;
+        }
+
+        /* --- The Contact Grid --- */
+        .contact-list {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .row {
+            display: grid;
+            /* Platform Name | The Sassy Description | Action Verb */
+            grid-template-columns: 150px 1fr 100px; 
+            align-items: baseline;
+            padding: 1.5rem 0;
+            border-top: 1px solid var(--border);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .row:last-child {
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* Typography */
+        .platform {
+            font-size: 1.2rem;
+            color: var(--ink);
+            font-weight: 400;
+        }
+
+        .desc {
+            font-size: 1.8rem;
+            color: var(--subtle); /* Starts grey */
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        .action {
+            font-size: 1rem;
+            color: var(--accent);
+            text-align: right;
+            font-style: italic;
+            opacity: 0; /* Hidden by default */
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+
+        /* Hover Effects */
+        .row:hover .desc {
+            color: var(--ink); /* Turns black */
+            font-style: italic;
+        }
+
+        .row:hover .platform {
+            color: var(--accent); /* Label turns red */
+        }
+
+        .row:hover .action {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* --- Mobile --- */
+        @media (max-width: 768px) {
+            body { padding: 2rem; }
+            nav { position: static; margin-bottom: 4rem; justify-content: flex-start;}
+            header { margin-top: 0; margin-bottom: 3rem; }
+            
+            .row {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+            
+            .platform { font-size: 1rem; color: var(--subtle); }
+            .desc { font-size: 1.6rem; }
+            .action { display: none; } /* Hide action verb on mobile */
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="fade-in">
+        <a href="./index.html" class="nav-link">Home</a>
+        <a href="./essay.html" class="nav-link">Essays</a>
+        <a href="./marginalia.html" class="nav-link">Marginalia</a>
+    </nav>
+
+    <header class="fade-in">
+        <h1>Communication Channels</h1>
+        <div class="subtitle">
+            Reach out. I reply to interesting things immediately and boring things never.
+        </div>
+    </header>
+
+    <main class="contact-list fade-in">
+        
+        <a href="mailto:manas.m.mahale@gmail.com" class="row">
+            <span class="platform">Email</span>
+            <span class="desc">For things that couldn't be a tweet.</span>
+            <span class="action">Send</span>
+        </a>
+
+        <a href="https://www.linkedin.com/in/manasmahale/" target="_blank" class="row">
+            <span class="platform">LinkedIn</span>
+            <span class="desc">Where I engage in professional cosplay.</span>
+            <span class="action">Connect</span>
+        </a>
+
+        <a href="https://github.com/Manas02?tab=repositories" target="_blank" class="row">
+            <span class="platform">GitHub</span>
+            <span class="desc">A graveyard of unfinished side projects.</span>
+            <span class="action">Judge</span>
+        </a>
+
+        <a href="https://scholar.google.com/citations?user=blcV6MQAAAAJ&hl=en&oi=ao" target="_blank" class="row">
+            <span class="platform">Scholar</span>
+            <span class="desc">Proof that I actually do work.</span>
+            <span class="action">Verify</span>
+        </a>
+
+        <a href="https://x.com/manas_mahale" target="_blank" class="row">
+            <span class="platform">X (Twitter)</span>
+            <span class="desc">Unhinged thoughts and doomscrolling.</span>
+            <span class="action">Follow</span>
+        </a>
+
+        <a href="https://bsky.app/profile/manasmahale.bsky.social" target="_blank" class="row">
+            <span class="platform">Bluesky</span>
+            <span class="desc">Like X, but with less anxiety.</span>
+            <span class="action">Escape</span>
+        </a>
+
+    </main>
+
+    <script>
+        document.querySelectorAll('.fade-in').forEach((el, index) => {
+            el.style.opacity = '0';
+            el.style.animation = `fadeIn 1s ease-out forwards ${index * 0.1}s`;
+        });
+    </script>
+
+    <style>
+        @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+        .fade-in { transform: translateY(20px); }
+    </style>
+</body>
+</html>
