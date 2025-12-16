@@ -245,7 +245,7 @@
             width: 100%;
             border: 1px solid var(--border);
         }
-        
+
         .video-container-with-sound video {
             width: 100%;
             display: block;
@@ -302,29 +302,110 @@
             margin: 1.5rem 0;
         }
 
-        /* --- Mobile --- */
-        @media (max-width: 768px) {
-            body { padding: 2rem; }
-            nav { position: static; margin-bottom: 2rem; }
-            .dossier { padding-top: 0; }
-            .section { grid-template-columns: 1fr; gap: 1rem; padding: 2rem 0;}
-            .section-label { position: static; color: var(--accent); }
-            .section-content { font-size: 1.3rem; }
-            .meta-grid { grid-template-columns: 1fr; gap: 1.5rem;}
-            .media-grid { grid-template-columns: 1fr; }
-            h1 { font-size: 3.5rem; }
+        .footer-section {
+            background: #EAE8E0;
+            padding: 5rem 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid var(--ink);
         }
-    </style>
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TSDKY5VGKJ"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-TSDKY5VGKJ');
-    </script>
-</head>
-<body>
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Equal columns */
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* The "Paper Card" Look */
+        .footer-card {
+            background: #FFFFFF;
+            border: 1px solid var(--ink);
+            padding: 3rem 2rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* subtle lift effect on hover */
+        .footer-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.05);
+        }
+
+        .footer-card h3 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            font-style: italic; /* Adds that 'handwritten note' feel */
+        }
+
+        .footer-card p {
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.95rem;
+            color: var(--subtle);
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        /* Specific button styling for the footer */
+        .action-btn {
+            width: 100%;
+            padding: 1rem;
+            background: transparent;
+            color: var(--ink);
+            border: 1px solid var(--ink);
+            font-family: 'Instrument Sans', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.9rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-block;
+        }
+
+        .action-btn:hover {
+            background: var(--ink);
+            color: var(--bg);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr; /* Stack them */
+                gap: 1.5rem;
+            }
+            .footer-section {
+                padding: 3rem 1.5rem;
+            }
+        }
+                /* --- Mobile --- */
+                @media (max-width: 768px) {
+                    body { padding: 2rem; }
+                    nav { position: static; margin-bottom: 2rem; }
+                    .dossier { padding-top: 0; }
+                    .section { grid-template-columns: 1fr; gap: 1rem; padding: 2rem 0;}
+                    .section-label { position: static; color: var(--accent); }
+                    .section-content { font-size: 1.3rem; }
+                    .meta-grid { grid-template-columns: 1fr; gap: 1.5rem;}
+                    .media-grid { grid-template-columns: 1fr; }
+                    h1 { font-size: 3.5rem; }
+                }
+            </style>
+
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-TSDKY5VGKJ"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-TSDKY5VGKJ');
+            </script>
+        </head>
+        <body>
 
     <nav>
         <a href="https://manasmahale.in" class="back-link">← Return to Index</a>
@@ -334,7 +415,7 @@
 
         <header>
             <h1>ARE YOU THE ONE?</h1>
-            
+
             <div class="meta-grid">
                 <div class="meta-item">
                     <strong>Candidate Status</strong>
@@ -429,16 +510,39 @@
             </div>
         </section>
 
-        <section style="background: #EAE8E0; padding: 3rem; margin-top: 2rem; border-top: 1px solid var(--ink);">
-            <div style="max-width: 600px; margin: 0 auto; text-align: center;">
-                <h3 style="font-size: 2rem; font-weight: 400; margin-bottom: 1rem;">Referral Program</h3>
-                <p style="font-family: 'Instrument Sans', sans-serif; margin-bottom: 2rem;">
-                    If this isn't for you, but a specific friend came to mind, do not let that thought go to waste. Facilitate a rom-com level meet-cute.
+        <section class="footer-section">
+          <div class="footer-grid">
+
+            <div class="footer-card">
+              <div>
+                <div style="font-size: 2rem; margin-bottom: 1rem; opacity: 0.5;">💬</div>
+                <h3>Referral Program</h3>
+                <p>
+                  If this isn't for you, but a specific friend came to mind, do not let that thought go to waste. Facilitate a rom-com level meet-cute.
                 </p>
-                <button id="matchmakerBtn" class="apply-button" style="background: transparent; color: var(--ink); border: 1px solid var(--ink);">
-                    Copy Referral Link
-                </button>
+              </div>
+              <button id="matchmakerBtn" class="action-btn">
+                Copy Referral Link
+              </button>
             </div>
+
+            <div class="footer-card">
+              <div>
+                <div style="font-size: 2rem; margin-bottom: 1rem; opacity: 0.5;">🤝</div>
+                <h3>Platonic Tier</h3>
+                <p>
+                  If you found this fun / cool let's be friends! I promise I am significantly less intense in real life.
+                </p>
+              </div>
+              <a href="mailto:manas.m.mahale@gmail.com?subject=Friendship%20Request" class="action-btn">
+                Befriend this moron
+              </a>
+            </div>
+
+          </div>
+        </section>
+
+          </div>
         </section>
 
     </div>
