@@ -318,10 +318,9 @@
                 success: function(sdfData) {
                     viewer.clear();
                     viewer.addModel(sdfData, "sdf");
-                    
-                    // High contrast "Ink" style
+
                     viewer.setStyle({}, { 
-                        stick: { radius: data.scale, color: "#111111" } 
+                        stick: { radius: data.scale}
                     });
                     
                     viewer.zoomTo();
@@ -344,7 +343,7 @@
     <footer class="footer-container fade-in">
     <img 
         src="./assets/a_scene_on_the_ice_1967.3.1.jpg"
-        alt="Kepler's Mysterium Cosmographicum" 
+        alt="A scene on the ice 1967"
         class="footer-art"
     >
 </footer>
