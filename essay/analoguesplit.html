@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Analogue Split — Manas Mahale</title>
-   
-    <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16x16.png">
-    <link rel="manifest" href="./assets/site.webmanifest">
-    
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://manasmahale.in/assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://manasmahale.in/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://manasmahale.in/assets/favicon-16x16.png">
+    <link rel="manifest" href="https://manasmahale.in/assets/site.webmanifest">
+
     <meta property="og:type" content="website">
     <meta property="og:title" content="Manas Mahale">
 
@@ -22,8 +22,8 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Manas Mahale">
     <meta name="twitter:image" content="https://manasmahale.in/assets/banner.jpeg">
-    
- 
+
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
 
@@ -33,196 +33,160 @@
             --subtle: #888888;
             --accent: #D93025;
             --border: #E0E0E0;
+            --max-width: 800px;
+        }
+
+        @font-face {
+            font-family: 'ETbb';
+            src: url('../assets/ETbb-Regular.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
         }
 
         /* --- Base & Typography --- */
-        ::selection { background: var(--accent); color: var(--bg); }
-        ::-moz-selection { background: var(--accent); color: var(--bg); }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; cursor: default; }
+    ::selection { background: var(--accent); color: var(--bg); }
 
-        body {
-            background-color: var(--bg);
-            color: var(--ink);
-            min-height: 100vh;
-            width: 100vw;
-            font-family: 'Instrument Serif', serif;
-            padding: 4rem;
-            overflow-x: hidden;
-            line-height: 1.4;
-        }
-
-        /* --- Navigation --- */
-        nav {
-            position: absolute;
-            top: 4rem;
-            right: 4rem;
-            display: flex;
-            gap: 2rem;
-            z-index: 10;
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: var(--subtle);
-            font-size: 1.1rem;
-            transition: color 0.3s ease;
-            cursor: pointer;
-        }
-
-        .nav-link:hover, .nav-link.active {
-            color: var(--accent);
-            font-style: italic;
-        }
-
-        /* --- Header --- */
-        header {
-            margin-bottom: 6rem;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            font-weight: 400;
-            margin-bottom: 0.5rem;
-            color: var(--ink);
-            line-height: 1.1;
-        }
-
-        .subtitle {
-            font-size: 1.5rem;
-            color: var(--subtle);
-            font-style: italic;
-            margin-top: 1rem;
-        }
-
-        /* --- Article Layout --- */
-        article {
-            max-width: 800px;
-            margin: 0 auto;
-            font-size: 1.5rem;
-        }
-
-        h2 {
-            font-size: 2.2rem;
-            font-weight: 400;
-            color: var(--ink);
-            margin-top: 4rem;
-            margin-bottom: 1.5rem;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 0.5rem;
-        }
-
-        p {
-            margin-bottom: 1.5rem;
-            text-align: justify;
-            text-justify: inter-word;
-        }
-
-        /* Epigraph Style */
-        .epigraph {
-            font-size: 1.25rem;
-            font-style: italic;
-            color: var(--subtle);
-            border-left: 2px solid var(--accent);
-            padding-left: 1.5rem;
-            margin-bottom: 3rem;
-        }
-
-        .epigraph p { margin-bottom: 0.75rem; }
-
-        /* Images */
-        .article-image {
-            width: 100%;
-            height: auto;
-            border-radius: 4px;
-            margin: 2rem 0;
-            border: 1px solid var(--border);
-        }
-
-        /* Links & Citations */
-        a {
-            color: var(--ink);
-            text-decoration: underline;
-            text-decoration-color: var(--accent);
-            text-underline-offset: 4px;
-        }
-        a:hover { color: var(--accent); }
-
-        .citation-ref {
-            font-size: 0.9rem;
-            vertical-align: super;
-            text-decoration: none;
-            color: var(--accent);
-            margin-left: 2px;
-        }
-
-        /* References Section */
-        .references {
-            margin-top: 6rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--ink);
-            font-size: 1.1rem;
-            color: var(--subtle);
-        }
-        
-        .references h3 {
-            font-size: 1.3rem;
-            margin-top: 0;
-            margin-bottom: 1rem;
-            color: var(--ink);
-        }
-
-        .ref-item {
-            margin-bottom: 0.75rem;
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .ref-num { min-width: 1.5rem; color: var(--accent); }
-        .ref-link { color: var(--subtle); text-decoration: none; border-bottom: 1px solid var(--border); }
-        .ref-link:hover { color: var(--accent); border-color: var(--accent); }
-
-        /* --- Mobile --- */
-        @media (max-width: 768px) {
-
-        body { 
-        padding: 1.5rem 1rem; 
-        }
-        
-        nav { 
-        position: static; 
-        margin-bottom: 3rem; 
-        justify-content: flex-start;
-        flex-wrap: wrap;
-        gap: 1rem;
-        }
-
-        h1 { 
-        font-size: 2.2rem; 
-        }
-
-        .subtitle {
-        font-size: 1.2rem;
-        }
-
-        article { 
-        font-size: 1.15rem; 
+    body {
+        background-color: var(--bg);
+        color: var(--ink);
+        font-family: 'ETbb', serif;
         line-height: 1.5;
-        }
+        /* Responsive padding: smaller on mobile, larger on desktop */
+        padding: clamp(1.5rem, 5vw, 4rem);
+        overflow-x: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
-        p {
-        text-align: left; /* Crucial for mobile legibility */
-        }
+    /* --- Layout Containers --- */
+    nav, header, article {
+        width: 100%;
+        max-width: var(--max-width);
+    }
 
-        .epigraph {
-        padding-left: 1rem;
+    /* --- Navigation --- */
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+        font-family: 'Instrument Serif', serif;
+    }
+
+    /* Align nav to right on desktop, left on mobile */
+    @media (min-width: 768px) {
+        nav { justify-content: flex-end; }
+    }
+
+    .nav-link {
+        text-decoration: none;
+        color: var(--subtle);
         font-size: 1.1rem;
-        }
-        }
+        transition: color 0.3s ease;
+    }
+
+    .nav-link:hover, .nav-link.active {
+        color: var(--accent);
+        font-style: italic;
+    }
+
+    /* --- Header & Headings --- */
+    header { margin-bottom: 2rem; }
+
+    h1 {
+        font-family: 'Instrument Serif', serif;
+        font-size: clamp(2rem, 8vw, 3.5rem);
+        font-weight: 400;
+        line-height: 1.1;
+        margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+        font-family: 'Instrument Serif', serif;
+        font-size: clamp(1.1rem, 4vw, 1.5rem);
+        color: var(--subtle);
+        font-style: italic;
+    }
+
+    h2 {
+        font-size: clamp(1.5rem, 5vw, 2.2rem);
+        font-weight: 400;
+        margin: 2rem 0 1rem;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 0.5rem;
+    }
+
+    h3 { margin: 1.5rem 0 0.5rem; }
+
+    /* --- Article Content --- */
+    article {
+        font-size: clamp(1.1rem, 3vw, 1.4rem);
+    }
+
+    p {
+        margin-bottom: 1.5rem;
+        text-align: left; /* Better for mobile; justify only on large screens */
+    }
+
+    @media (min-width: 768px) {
+        p { text-align: justify; text-justify: inter-word; }
+    }
+
+    .epigraph {
+        font-size: 0.9em;
+        font-style: italic;
+        color: var(--subtle);
+        border-left: 3px solid var(--accent);
+        padding-left: 1.5rem;
+        margin: 2rem 0;
+    }
+
+    /* --- Media & Math --- */
+    .article-image {
+        width: 100%;
+        height: auto;
+        display: block;
+        margin: 2rem 0;
+        border: 1px solid var(--border);
+    }
+
+    /* Prevents MathJax from breaking layout on small screens */
+    .mjx-container {
+        overflow-x: auto;
+        overflow-y: hidden;
+        max-width: 100%;
+        padding: 1rem 0;
+    }
+
+    /* --- Links --- */
+    a {
+        color: var(--ink);
+        text-underline-offset: 4px;
+        text-decoration-color: var(--accent);
+    }
+
+    a:hover { color: var(--accent); }
+
+    /* --- References --- */
+    .references {
+        font-size: 0.9em;
+        color: var(--subtle);
+    }
+
+    .ref-item {
+        margin-bottom: 1rem;
+        display: flex;
+        gap: 0.75rem;
+        line-height: 1.4;
+    }
+
+    .ref-num { color: var(--accent); min-width: 1.5rem; }
     </style>
+
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-TSDKY5VGKJ"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
@@ -279,14 +243,13 @@
             Gross performance metrics like accuracy and F1 score can be deceptive.<a href="#ref-6" class="citation-ref">[6]</a> I advocate for biased validation because models are only as good as the data they are validated against. With Analogue Split, we take a step closer to selecting models that don't just perform well, but perform meaningfully. After all, in practice, it is not about being right; it is about being useful.
         </p>
 
+        <h2>References</h2>
         <div class="references">
-            <h3>References</h3>
-            
             <div class="ref-item" id="ref-1">
                 <span class="ref-num">[1]</span>
                 <a href="https://arxiv.org/pdf/2406.00873" class="ref-link">Guo et al. 2024</a>
             </div>
-            
+
             <div class="ref-item" id="ref-2">
                 <span class="ref-num">[2]</span>
                 <a href="https://practicalcheminformatics.blogspot.com/2024/11/some-thoughts-on-splitting-chemical.html" class="ref-link">Walters 2024</a>
