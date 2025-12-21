@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>More on More O'Ferrall-Jenks Diagram — Manas Mahale</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://manasmahale.in/assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://manasmahale.in/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://manasmahale.in/assets/favicon-16x16.png">
+    <link rel="manifest" href="https://manasmahale.in/assets/site.webmanifest">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Manas Mahale">
+
+    <meta property="og:url" content="https://manasmahale.in/">
+    <meta property="og:image" content="https://manasmahale.in/assets/banner.jpeg">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Manas Mahale">
+    <meta name="twitter:image" content="https://manasmahale.in/assets/banner.jpeg">
+
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+
+        :root {
+            --bg: #F5F4EF;
+            --ink: #111111;
+            --subtle: #888888;
+            --accent: #D93025;
+            --border: #E0E0E0;
+            --max-width: 800px;
+        }
+
+        @font-face {
+            font-family: 'ETbb';
+            src: url('../assets/ETbb-Regular.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        /* --- Base & Typography --- */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    ::selection { background: var(--accent); color: var(--bg); }
+
+    body {
+        background-color: var(--bg);
+        color: var(--ink);
+        font-family: 'ETbb', serif;
+        line-height: 1.5;
+        /* Responsive padding: smaller on mobile, larger on desktop */
+        padding: clamp(1.5rem, 5vw, 4rem);
+        overflow-x: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* --- Layout Containers --- */
+    nav, header, article {
+        width: 100%;
+        max-width: var(--max-width);
+    }
+
+    /* --- Navigation --- */
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+        font-family: 'Instrument Serif', serif;
+    }
+
+    /* Align nav to right on desktop, left on mobile */
+    @media (min-width: 768px) {
+        nav { justify-content: flex-end; }
+    }
+
+    .nav-link {
+        text-decoration: none;
+        color: var(--subtle);
+        font-size: 1.1rem;
+        transition: color 0.3s ease;
+    }
+
+    .nav-link:hover, .nav-link.active {
+        color: var(--accent);
+        font-style: italic;
+    }
+
+    /* --- Header & Headings --- */
+    header { margin-bottom: 2rem; }
+
+    h1 {
+        font-family: 'Instrument Serif', serif;
+        font-size: clamp(2rem, 8vw, 3.5rem);
+        font-weight: 400;
+        line-height: 1.1;
+        margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+        font-family: 'Instrument Serif', serif;
+        font-size: clamp(1.1rem, 4vw, 1.5rem);
+        color: var(--subtle);
+        font-style: italic;
+    }
+
+    h2 {
+        font-size: clamp(1.5rem, 5vw, 2.2rem);
+        font-weight: 400;
+        margin: 2rem 0 1rem;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 0.5rem;
+    }
+
+    h3 { margin: 1.5rem 0 0.5rem; }
+
+    /* --- Article Content --- */
+    article {
+        font-size: clamp(1.1rem, 3vw, 1.4rem);
+    }
+
+    p {
+        margin-bottom: 1.5rem;
+        text-align: left; /* Better for mobile; justify only on large screens */
+    }
+
+    @media (min-width: 768px) {
+        p { text-align: justify; text-justify: inter-word; }
+    }
+
+    .epigraph {
+        font-size: 0.9em;
+        font-style: italic;
+        color: var(--subtle);
+        border-left: 3px solid var(--accent);
+        padding-left: 1.5rem;
+        margin: 2rem 0;
+    }
+
+    /* --- Media & Math --- */
+    .article-image {
+        width: 100%;
+        height: auto;
+        display: block;
+        margin: 2rem 0;
+        border: 1px solid var(--border);
+    }
+
+    /* Prevents MathJax from breaking layout on small screens */
+    .mjx-container {
+        overflow-x: auto;
+        overflow-y: hidden;
+        max-width: 100%;
+        padding: 1rem 0;
+    }
+
+    /* --- Links --- */
+    a {
+        color: var(--ink);
+        text-underline-offset: 4px;
+        text-decoration-color: var(--accent);
+    }
+
+    a:hover { color: var(--accent); }
+
+    /* --- References --- */
+    .references {
+        font-size: 0.9em;
+        color: var(--subtle);
+    }
+
+    .ref-item {
+        margin-bottom: 1rem;
+        display: flex;
+        gap: 0.75rem;
+        line-height: 1.4;
+    }
+
+    .ref-num { color: var(--accent); min-width: 1.5rem; }
+
+    /* --- Interactive Figure Styles --- */
+    .tufte-figure {
+            font-family: "EtBb", "Bembo", "Palatino", "Georgia", serif;
+            margin: 3rem 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 2rem 0;
+    }
+
+    .figure-title { font-variant: small-caps; font-size: 1.1rem; margin-bottom: 8px; letter-spacing: 0.05em; }
+
+    .caption {
+        font-size: 0.9rem;
+        max-width: 650px;
+        font-style: italic;
+        margin-bottom: 30px;
+        color: var(--subtle);
+    }
+
+    /* Responsive Grid: Stacks on mobile, side-by-side on desktop */
+    .figure-container {
+        display: grid;
+        grid-template-columns: 1fr; /* Default (Mobile): 1 single column */
+        gap: 20px;
+        width: 100%;
+    }
+
+    /* Desktop override (>768px) */
+    @media (min-width: 768px) {
+        .figure-container {
+            /* Fixed sidebar width, remaining space for plot */
+            grid-template-columns: 220px 1fr;
+            gap: 40px;
+        }
+        .sidebar { border-right: 0.5px solid var(--border); padding-right: 20px; }
+    }
+
+    .control-group { margin-bottom: 25px; }
+
+    .tufte-figure label {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.85rem;
+        margin-bottom: 8px;
+        color: var(--ink);
+    }
+
+    /* Custom Tufte-style Sliders */
+    input[type=range] {
+        width: 100%;
+        -webkit-appearance: none;
+        background: transparent;
+    }
+    input[type=range]:focus { outline: none; }
+
+    input[type=range]::-webkit-slider-runnable-track {
+        width: 100%; height: 1px; background: #999; cursor: pointer;
+    }
+    input[type=range]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        height: 12px; width: 12px;
+        border-radius: 50%;
+        background: var(--ink);
+        cursor: grab;
+        margin-top: -5.5px; /* Offset to center on the track */
+    }
+    input[type=range]::-moz-range-thumb {
+            height: 12px; width: 12px; border-radius: 50%;
+            background: var(--ink); cursor: grab; border: none;
+    }
+
+    /* Ensure Plotly is responsive */
+    /* Ensure the plot never exceeds the screen width on mobile */
+    .plot-div { 
+        height: 400px; 
+        width: 100% !important; 
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    @media (min-width: 768px) { 
+        .plot-div { height: 500px; } 
+    }
+    
+    .hammond-flex-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        width: 100%;
+        max-width: 100%; /* Prevents horizontal overflow */
+        margin: 2rem 0;
+        box-sizing: border-box;
+    }
+
+    .hammond-plot-wrapper {
+        flex: 1 1 320px; /* Stacks vertically when screen < 680px */
+        height: 400px;
+        width: 100% !important; /* Force plotly to respect container */
+        max-width: 100%;
+        min-width: 0; 
+        display: block;
+        overflow: hidden; /* Hide any internal overflow during resize */
+    }
+
+    .thornton-container {
+        display: flex;
+        flex-direction: column; /* Mobile first: stack vertically */
+        gap: 20px;
+        width: 100%;
+        max-width: 100%;
+        margin: 2rem 0;
+        box-sizing: border-box;
+    }
+
+    @media (min-width: 768px) {
+        .thornton-container {
+            flex-direction: row; /* Desktop: side-by-side */
+            align-items: flex-start;
+        }
+        .sidebar {
+            flex: 0 0 220px;
+        }
+    }
+
+    /* Plot wrapper must be strictly contained */
+    .thornton-plot-wrapper {
+        flex: 1 1 auto;
+        width: 100% !important;
+        max-width: 100%;
+        aspect-ratio: 1 / 1;
+        min-width: 0; 
+        display: block;
+        overflow: hidden;
+        position: relative;
+    }
+
+    /*  */
+    .moj-vector-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+        max-width: 100%;
+        margin: 2rem 0;
+        box-sizing: border-box;
+    }
+
+    @media (min-width: 768px) {
+        .moj-vector-container {
+            flex-direction: row;
+            align-items: flex-start;
+        }
+        .vector-sidebar {
+            flex: 0 0 260px;
+        }
+    }
+
+    .vector-plot-wrapper {
+        flex: 1 1 auto;
+        width: 100% !important;
+        aspect-ratio: 1 / 1;
+        min-width: 0;
+        display: block;
+        position: relative;
+        overflow: hidden;
+    }
+
+
+    
+    </style>
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TSDKY5VGKJ"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-TSDKY5VGKJ');
+    </script>
+
+</head>
+<body>
+
+    <nav>
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="../essay.html" class="nav-link active">Essays</a>
+        <a href="../marginalia.html" class="nav-link">Marginalia</a>
+        <a href="../contact.html" class="nav-link">Contact</a>
+    </nav>
+
+    <header>
+        <h1>More on More O'Ferrall-Jencks Diagram</h1>
+        <div class="subtitle">Surfing the Potential Energy Surface</div>
+    </header>
+
+    <article>
+        <h2>Transition State Theory</h2>
+        <h3>Arrhenius</h3>
+        <p>In 1889, Svante Arrhenius proposed the first quantitative relationship between reaction rate and temperature.</p>
+        \[k = A e^{-E_a/RT}\]
+        <p>His empirical equation introduced the concept of activation energy (\(E_a\)), a barrier molecules must surmount to react. However, Arrhenius’s model was macroscopic and provided no insight into the internal reconfiguration of bonds or the geometry of the species at the peak. While the pre-exponential factor (\(A\)) accounted for collision frequency and orientation, it lacked a derivation from first principles, a gap later addressed by Transition State Theory.</p>
+
+        <h3>Eyring, Polanyi & Potential Energy Surface</h3>
+        <p>Around 1930-31, Henry Eyring and Michael Polanyi applied QM to the hydrogen exchange reaction (shown below). By assuming a collinear geometry (the three atoms in a straight line), they reduced the system’s degrees of freedom to allow for a 3D visualization.</p>
+        \[H_2 + H \rightarrow H_2 + H\]
+        <p>Using the London equation for the potential energy of a three-electron system and incorporating experimental data on vibrational frequencies and dissociation energies (a precursor to the LEPS (London-Eyring-Polanyi-Sato) method), they constructed the first potential-energy surface (PES). This was a three-dimensional diagram where the vertical axis represented potential energy, and the two horizontal axes represented the internuclear distances between the three hydrogen atoms.</p>
+        <p>This idea turned out to be revolutionary. For the first time, chemists could visualize a reaction not as a discrete jump between states, but as a continuous motion of a point mass rolling across an energy landscape. It is also highly intuitive, the reactants occupied a deep valley, the products another, and separating them was a "saddle"-shaped region.</p>
+        <h3>Pelzer, Wigner & The Saddle Point</h3>
+        <p>A year later, Hans Pelzer and Eugene Wigner refined this interpretation. They explicitly identified the “col” or “saddle point”. Along the Reaction Coordinate,  transition state (TS) is the highest energy point on the minimum energy path and perpendicular to the reaction coordinate, TS is a minimum. It sits at the bottom of the valley perpendicular to the path. Knowing this will come handy as we discuss Parallel and Perpendicular effects in More O’Ferrall-Jencks Diagram.</p>
+
+        <div class="tufte-figure">
+                <div class="figure-title">Figure 1. The Saddle Point</div>
+                <div class="caption">
+                    The potential energy surface visualized as a continuous landscape. The transition state (‡) sits at the stationary point where the reaction coordinate reaches a maximum and the perpendicular coordinate sits at a minimum.
+                </div>
+
+                <div class="figure-container">
+                    <div class="sidebar">
+                        <div class="control-group">
+                            <label for="c-f1">Barrier Curvature</label>
+                            <input type="range" id="c-f1" min="0.5" max="2.0" value="1.0" step="0.1">
+                        </div>
+                        <div class="control-group">
+                            <label for="w-f1">Valley Curvature</label>
+                            <input type="range" id="w-f1" min="0.5" max="2.0" value="1.0" step="0.1">
+                        </div>
+                    </div>
+                    <div id="plot1" class="plot-div"></div>
+                </div>
+            </div>
+
+        <h3>Absolute Reaction Rate Theory</h3>
+        <p>In 1935, Henry Eyring formalized Transition State Theory (TST) by introducing the quasi-equilibrium assumption. This postulate bridges the gap between kinetics and thermodynamics by treating the activated complex as if it were in a state of equilibrium with the reactants.</p>
+        \[A + B \rightleftharpoons [AB]^{\ddagger} \rightarrow \text{Products}\]
+        <p>While a true equilibrium is impossible given the activated complex is constantly crossing the barrier to form products, TST assumes that the transition state species maintains a Boltzmann distribution of energy levels for all degrees of freedom except the reaction coordinate. This allows the concentration of the transition state to be expressed using an equilibrium constant, \(K^\ddagger\). By applying this assumption, Eyring replaced the empirical pre-exponential factor (\(A\)) from the Arrhenius equation with fundamental physical constants. He defined the rate constant \((k)\) as:</p>
+
+        \[k = \kappa \frac{k_B T}{h} K^{\ddagger}\]
+
+        <p>where \(T\) is temperature, \(k_B\) is the Boltzmann constant, \(h\) is Planck's constant, \(\kappa\) is the transmission coefficient, and \(K^{\ddagger}\) is the equilibrium constant for the formation of the transition state.</p>
+
+        <p>By expressing \(K^{\ddagger}\) in terms of thermodynamic quantities, Eyring linked the rate of reaction to the entropy (\(S^{\ddagger}\)) and enthalpy (\(H^{\ddagger}\)) of activation, making the relation between kinetics and thermodynamics explicit.</p>
+
+        \[k = \frac{k_B T}{h} e^{\Delta S^{\ddagger}/R} e^{-\Delta H^{\ddagger}/RT}\]
+
+        <p>However, while TST can calculate a rate <i>if</i> the PES is known, it cannot predict how that surface will shift if the chemical structure is modified. This gap is filled by arguably the most famous heuristic in physical organic chemistry: the Hammond Postulate.</p>
+
+        <h3>The Hammond Postulate</h3>
+        <p>George Hammond, published his seminal work, "A Correlation of Reaction Rates"  in 1955. He proposed that one could deduce the structure of the elusive transition state by looking at the stable species closest to it in energy. In his own words:</p>
+        <p class="epigraph">If two states, as, for example, a transition state and an unstable intermediate, occur consecutively during a reaction process and have nearly the same energy content, their interconversion will involve only a small reorganization of the molecular structures.</p>
+        <p>The consequences of this heuristic are obvious. In an exergonic reaction, the transition state is closer in energy to the reactants than to the products. Therefore, the transition state structurally resembles the reactants. This is termed an "early" transition state. Conversely, in endergonic reaction, the transition state is closer in energy to the products. Therefore, the transition state structurally resembles the products. This is termed a "late" transition state.</p>
+
+
+        <div class="tufte-figure">
+            <div class="figure-title">Figure 2. Structural Consequences of the Hammond Postulate</div>
+            <div class="caption">
+                <strong>Exergonic (Left):</strong> The transition state is closer in energy to reactants, leading to an "early" TS.
+                <strong>Endergonic (Right):</strong> The TS is closer to products, leading to a "late" TS.
+            </div>
+            <div class="hammond-flex-container">
+                <div id="plotEx" class="hammond-plot-wrapper"></div>
+                <div id="plotEn" class="hammond-plot-wrapper"></div>
+            </div>
+        </div>
+
+
+
+        <h4>The Mountain Pass Analogy</h4>
+        <p>The intuition is best captured by the analogy of crossing a mountain range. If one travels from a high plateau (high energy reactants) to a low valley (low energy products), the highest point of the pass is encountered early in the journey, near the plateau. Conversely, if one climbs from a low valley to a high plateau, the summit is reached late, just before stepping onto the plateau.</p>
+
+        <p>However, this intuition is not absolute. As illustrated in Modern Physical Organic Chemistry by Anslyn (Ch. 7, Q. 26), the postulate “fails” when the potential energy surface contains relatively flat sections. In the context of Marcus analysis (which I won’t cover here), this corresponds to parabolas of significantly different widths; specifically, an exergonic reaction can exhibit a “late” transition state if the energy surface near the reactants is broad and flat.</p>
+
+        <h3>The Leffler Equation</h3>
+        <p>It’s interesting to note that two years prior to Hammond’s publication, John E. Leffler proposed a mathematical formulation of this principle, essentially a quantitative version of the postulate. Leffler suggested that the properties of the transition state could be described as a linear combination of the properties of the reactants and products. This is encapsulated in the Leffler equation (often linked to the Brønsted catalysis law):</p>
+
+        \[\Delta G^{\ddagger} = \alpha \Delta G^\circ + C\]
+
+        <p>where, \(\Delta G^{\ddagger}\) is the change in activation free energy caused by a substituent. \(\Delta G^\circ\) is the change in the overall standard free
+            energy of reaction and \(\alpha\) is the proportionality constant (\(0 \lt \alpha \lt 1\)).</p>
+
+        <p>Coefficient of \(\alpha\) serves as a coordinate for the transition state along the reaction path. For instance, \(\alpha \approx 0\) indicates the TS is reactant-like (Early), and \(\alpha \approx 1\) indicates the TS is product-like (Late).</p>
+
+        <p>This relationship, often visualized as a Linear Free Energy Relationship (LFER), provided the first axis for what would become the More O'Ferrall-Jencks diagram. It described movement along the reaction coordinate. However, it treated the reaction path as fixed. It could not describe what happens when the mechanism itself shifts sideways such as, when an \(S_N2\) reaction shifts towards more \(S_N1\) character.</p>
+
+        <h3>More O'Ferrall, Jencks & Reaction Map</h3>
+
+        <p>By the late 60s, the limitations of the single reaction coordinate were becoming clear. Mechanistic studies on \(\beta\)-eliminations and nucleophilic substitutions showed a continuum of behaviors. A reaction might be "mostly \(E_2\)" but with "some \(E_1cb\) character". To describe this, chemists needed a map that allowed for deviation from the central path.</p>
+        <p>In 1970, R.A. More O'Ferrall published a paper specifically addressing the relationship between \(E_2\) and \(E_1cb\) mechanisms. He proposed a two-dimensional plot where the axes represented the two bond orders changing during the elimination: the breaking of the C-H bond and the breaking of the C-LG (leaving group) bond.</p>
+        <p>This 2D representation converted the "reaction path" from a line into a vector on a plane. The transition state was no longer a fixed point on a fixed line; it was a saddle point that could drift across a surface defined by the two independent bond coordinates.</p>
+        <p>William P. Jencks, a giant in the field of catalysis, adopted this diagrammatic method to clarify the mechanisms of general acid-base catalysis and addition reactions to carbonyls. Jencks recognized that the ambiguity in these reactions, whether proton transfer precedes, accompanies, or follows nucleophilic attack, could be perfectly resolved by mapping the energy surface. This combined effort cemented the "More O'Ferrall-Jencks Diagram" (MOJ diagram) as the standard framework for analyzing concerted versus stepwise mechanisms.</p>
+        <p>The MOJ diagram is a contour plot of the potential energy surface (PES) projected onto a generic square defined by normalized bond orders.</p>
+        <p>The axes of the diagram define the "reaction space". Typically, these are bond orders, ranging from 0 (no bond) to 1 (full bond), or 1 to 0 in the case of bond breaking.</p>
+        \[A-B + C \rightarrow A + B-C\]
+        <p>For a generic reaction such as the one above, X-Axis represents the progress of formation of the B-C bond (0 \(\rightarrow\) 1) and Y-Axis represents the progress of forming the A-B bond (0 \(\rightarrow\) 1). This creates a unit square. The “Z-axis”, projecting out of the page, represents the Gibbs Free Energy of the system.</p>
+        <p>We can consider the energy surface as defined by four distinct corners. The top-left (0,1) and bottom-right (1,0) represent stable energy minima for the Reactants and Products, respectively. </p>
+        <p>In contrast, the off-diagonal corners represent high-energy intermediates (note: they could be local minima). Here, the bottom-left (0,0) depicts a species where both bonds are broken (dissociative intermediate, e.g., a carbocation), while the top-right (1,1) represents a species with A-B-C bonds (associative intermediate, e.g., a pentacoordinate intermediate).</p>
+        <div class="tufte-figure">
+            <div class="figure-title">Figure 3. Interactive Energy Landscape</div>
+            <div class="caption">
+                Adjust the corner energies to deform the Potential Energy Surface. The transition state (‡) is fixed at the initial saddle point (0.5, 0.5) while the gradients shift around it. Try to see how increase/decrease in energy of reactant, product or intermediate changes the PES curvature.
+            </div>
+            <div class="thornton-container">
+                <div class="sidebar">
+                    <div class="control-group">
+                        <label for="g01">Reactants (0,1)</label>
+                        <input type="range" id="g01" min="-20" max="20" value="0" step="1">
+                    </div>
+                    <div class="control-group">
+                        <label for="g10">Products (1,0)</label>
+                        <input type="range" id="g10" min="-20" max="20" value="-10" step="1">
+                    </div>
+                    <div class="control-group">
+                        <label for="g11">Associative (1,1)</label>
+                        <input type="range" id="g11" min="0" max="50" value="28" step="1">
+                    </div>
+                    <div class="control-group">
+                        <label for="g00">Dissociative (0,0)</label>
+                        <input type="range" id="g00" min="0" max="50" value="28" step="1">
+                    </div>
+                </div>
+                <div id="plot3" class="thornton-plot-wrapper"></div>
+            </div>
+        </div>
+
+
+        <h4>Knowing this, how can we actually infer mechanistic information ?</h4>
+
+        <p>A straight line connecting Reactants to Products represents a perfectly synchronous mechanism. Along this path, the bond order of the breaking bond decreases at exactly the same rate as the forming bond increases. This is the ideal \(S_N2\) or \(E_2\) path.</p>
+        <p>If the system moves from Reactants to Intermediate with bond breaking first, and then to Products, it indicates dissociative mechanism (e.g., \(S_N1\), \(E_1\)). Conversely, when the system moves from Reactants to Intermediate with bond formation first, and then to Products, it indicates an associative mechanism</p>
+        <p>The energy surface over this square typically resembles a saddle. The Reactant and Product corners are valleys. The Intermediate corners are usually high peaks (assuming the intermediates are unstable). The transition state is the "pass" between the reactant and product valleys. However, the "pass" is not a single point but a region. </p>
+        <p>If the intermediates are relatively stable (low energy), the saddle region becomes broad and flat, allowing the transition state to "wander" significantly. If the intermediates are very high energy, the saddle is steep and narrow, confining the transition state to the central diagonal.</p>
+
+        <h4>Exercise for the reader - How does the activation entropy \(\Delta S^{\ddagger}\) differ between a transition state confined to a steep, narrow saddle versus one that 'wanders' across a broad, flat saddle region? and How does this affect the rate of the reaction ?</h4>
+
+        <h3>Thornton's Rules</h3>
+        <p>In 1967, Edward Thornton attempted an answer to <i>how does the transition state move when we change a substituent, solvent, or leaving group?</i>  His insight was that the movement is governed by the curvature of the PES. These rules became essential for predicting "Hammond" and "Anti-Hammond" effects in MOJ diagrams.</p>
+        <p>Thornton modeled the transition state as a geometric saddle point, defined by two opposing types of curvature. The reaction coordinate mode represents motion along the reaction path; because the transition state is an energy maximum in this direction (like the top of a hill), the curvature is negative (yielding an imaginary frequency). Conversely, the perpendicular mode represents motion orthogonal to the path; because the transition state sits at the bottom of an energy valley in this direction, the curvature is positive (yielding a real vibrational frequency).</p>
+        <h4>What does Real or Imaginary frequencies even mean ?</h4>
+        <p>Using Hooke’s law, \(\nu \propto \sqrt{k}\), where \(k\) is the force constant representing the curvature of the potential energy surface. In the perpendicular mode, the transition state sits in an energy valley (minimum) where curvature is positive meaning \(k \gt 0\); the square root of a positive number yields a real frequency, representing stable oscillation with a restoring force. Conversely, along the reaction coordinate, the transition state is an energy maximum (hill) where curvature is negative \(k \lt 0\). Since the square root of a negative number is imaginary, this yields an imaginary frequency, physically signifying the instability that drives the system down the hill toward products rather than restoring it to the peak.</p>
+        <p>This difference in curvature i.e. negative parallel, positive perpendicular, dictates how the TS responds to energy changes.</p>
+
+        <h3>The Hammond Effect (Parallel Effect)</h3>
+        <p>A perturbation that raises the energy of the reactant relative to the transition state will shift the transition state along the reaction coordinate toward the reactants.</p>
+        <p>Imagine a ball balanced on the peak of a hill (the TS). If you raise the plateau on the reactant side (making reactants less stable, reaction more exergonic), the peak effectively shifts closer to the reactant side. This means making the reaction more exergonic leads to earlier TS and making it more endergonic shifts it to a later TS.</p>
+        <h3>The Anti-Hammond Effect (Perpendicular Effect)</h3>
+        <p>A perturbation that raises the energy of the intermediate perpendicular to the reaction path will cause the transition state to move away from that high-energy region. </p>
+        <p>Since the TS is a minimum in the perpendicular direction (it sits at the bottom of the saddle's cross-section), it behaves like a marble in a bowl. If you raise one side of the bowl (destabilize an intermediate), the marble rolls away from the rising side.</p>
+        <p>This means, if the carbocation intermediate is destabilized, the TS moves away from the carbocation corner, becoming more concerted (synchronous, \(S_N1 \rightarrow S_N2\) for instance). This effect shows change in TS perpendicular to the reaction diagonal.</p>
+        <p>Hereon, it’s simple vector addition.</p>
+        \[\vec{V}_{net} = \vec{V}_{\parallel} + \vec{V}_{\perp}\]
+
+
+        <div class="tufte-figure">
+            <div class="figure-title">Figure 4. Vector Sum Shows TS in the More O'Ferrall-Jencks Diagram</div>
+            <div class="caption">
+                The Transition State (\(\ddagger\)) position is the result of \(\vec{V}_{new} = \vec{V}_{\parallel} + \vec{V}_{\perp}\).
+                Isoline labels indicate energy levels; the TS (\(\ddagger\)) remains a saddle point while the vectors illustrate its shift.
+            </div>
+
+            <div class="moj-vector-container">
+                <div class="vector-sidebar sidebar">
+                    <div class="control-group">
+                        <label>Reactant Energy (0,0)</label>
+                        <input type="range" id="v01" min="-15" max="15" value="0" step="1">
+                    </div>
+                    <div class="control-group">
+                        <label>Product Energy (1,1)</label>
+                        <input type="range" id="v10" min="-15" max="15" value="-10" step="1">
+                    </div>
+                    <div class="control-group">
+                        <label style="color:#c0392b">Associative Int. (0,1)</label>
+                        <input type="range" id="v00" min="0" max="45" value="28" step="1">
+                    </div>
+                    <div class="control-group">
+                        <label style="color:#2980b9">Dissociative Int. (1,0)</label>
+                        <input type="range" id="v11" min="0" max="45" value="28" step="1">
+                    </div>
+                    <button onclick="resetVectors()" style="width:100%; padding:8px; cursor:pointer; font-family:inherit; background:#eee; border:none; border-radius:4px;">
+                        Reset Center
+                    </button>
+                </div>
+
+                <div id="plot4" class="vector-plot-wrapper"></div>
+            </div>
+        </div>
+
+
+        <p>There's a lot more for me to add here. Jencks' cross-interaction constant, using MOJ diagram with Hammett and other LFERs, nitroalkane anomaly, principle of non-perfect synchronization, effects of solvents on substitution reactions, mechanistic studies of enzymes and much much more. But I need to sleep and I think the reading list presented here does justice to these topics far better than I could.</p>
+
+        <h2>Selected Bibliography</h2>
+
+        <div class="references">
+            <div class="ref-item">
+                <a href="https://books.google.co.ke/books?id=gY-Sxijk_tMC&printsec=frontcover#v=onepage&q&f=false" class="ref-link"> Anslyn, E. V.; Dougherty, D. A. Modern Physical Organic Chemistry; University science: Sausalito (Calif.), 2006.</a>
+            </div>
+
+            <div class="ref-item">
+                <a href="https://doi.org/10.1126/science.117.3039.340" class="ref-link">Leffler et al.</a>
+            </div>
+
+            <div class="ref-item">
+                <a href="https://doi.org/10.5772/intechopen.78705" class="ref-link">Ptáček et al. </a>
+            </div>
+
+            <div class="ref-item">
+                <a href="https://doi.org/10.1002/jcc.20527" class="ref-link">Nye et al.</a>
+            </div>
+
+            <div class="ref-item">
+                <a href="https://doi.org/10.1021/j100238a002" class="ref-link">Laidler et al.</a>
+            </div>
+
+            <div class="ref-item">
+                <a href="https://doi.org/10.1021/ja00506a026" class="ref-link">Harris et al.</a>
+            </div>
+
+            <div class="ref-item">
+                <a href="https://doi.org/10.1073/pnas.0406091101" class="ref-link">Fersht et al.</a>
+            </div>
+
+            <div class="ref-item">
+                <a href="https://doi.org/10.1039/d0ra10759j" class="ref-link">Kalu et al.</a>
+            </div>
+
+            <div class="ref-item">
+                <a href="https://doi.org/10.1039/d4ra00066h" class="ref-link">de Andrade et al.</a>
+            </div>
+
+            <div class="ref-item">
+                <a href="https://doi.org/10.1021/ed079p1372" class="ref-link">Tyler et al.</a>
+            </div>
+
+            <div class="ref-item">
+                <a href="https://doi.org/10.1139/v74-270" class="ref-link">Kresge et al.</a>
+            </div>
+
+            <div class="ref-item">
+                <a href="https://doi.org/10.1021/ja00881a024" class="ref-link">Cordes et al.</a>
+            </div>
+
+            <div class="ref-item">
+                <a href="https://doi.org/10.1021/ar00013a002" class="ref-link">Bernasconi et al.</a>
+            </div>
+
+            <p>
+                Any errors above are mine; everything I got right was thanks to Prof. Nuno Basílio.
+            </p>
+        </div>
+    </article>
+
+    <script>
+    // Wrap in an IIFE (Immediately Invoked Function Expression) to isolate scope.
+    (function() {
+        const plotID = 'plot1';
+        const plotContainer = document.getElementById(plotID); // Get the container element
+        const inputC = document.getElementById('c-f1');
+        const inputW = document.getElementById('w-f1');
+
+        // Tufte colors defined in figure example
+        const colors = { red: '#b01a1a', blue: '#1a5fb4', ink: '#111111', bg: '#F5F4EF' };
+        const serifStack = '"Crimson Pro", "EtBb", "Bembo", "Palatino", "serif"';
+
+        const res = 45;
+        const xGrid = Array.from({length: res+1}, (_, i) => -2 + (i/res)*4);
+        const yGrid = [...xGrid];
+
+        const calculateZ = (x, y, C, W) => (0.5 * W * y * y) - (0.5 * C * x * x);
+
+        function update() {
+            const C = parseFloat(inputC.value);
+            const W = parseFloat(inputW.value);
+            const z = yGrid.map(y => xGrid.map(x => calculateZ(x, y, C, W)));
+
+            const surface = {
+                z: z, x: xGrid, y: yGrid,
+                type: 'surface',
+                // Adjusted colorscale slightly to blend better with blog background
+                colorscale: [[0, '#d1d1d1'], [0.5, colors.bg], [1, '#d1d1d1']],
+                showscale: false,
+                opacity: 0.9,
+                contours: { z: { show: true, usecolormap: false, color: '#e5e5e0', project: { z: true } } },
+                hoverinfo: 'none'
+            };
+
+            const ts = {
+                x: [0], y: [0], z: [0],
+                mode: 'markers+text', type: 'scatter3d',
+                marker: {size: 4, color: colors.ink},
+                text: ['‡'],
+                textposition: 'top center',
+                textfont: { size: 22, family: serifStack, color: colors.ink },
+                hoverinfo: 'none'
+            };
+
+            const pathR = {
+                x: xGrid, y: xGrid.map(() => 0), z: xGrid.map(x => calculateZ(x, 0, C, W)),
+                type: 'scatter3d', mode: 'lines', line: { color: colors.red, width: 4 },
+                hoverinfo: 'none'
+            };
+
+            const pathP = {
+                x: yGrid.map(() => 0), y: yGrid, z: yGrid.map(y => calculateZ(0, y, C, W)),
+                type: 'scatter3d', mode: 'lines', line: { color: colors.blue, width: 4 },
+                hoverinfo: 'none'
+            };
+
+            const labels = {
+                x: [1.9, 0], y: [0, 1.9], z: [calculateZ(1.9, 0, C, W), calculateZ(0, 1.9, C, W)],
+                mode: 'text', type: 'scatter3d',
+                text: ['Reaction Coordinate (Max)', 'Perpendicular Mode (Min)'],
+                textfont: { size: 12, family: serifStack, color: [colors.red, colors.blue] },
+                textposition: ['bottom center', 'middle right'],
+                hoverinfo: 'none'
+            };
+
+            const layout = {
+                margin: {l:0, r:0, b:0, t:0},
+                paper_bgcolor: 'rgba(0,0,0,0)',
+                plot_bgcolor: 'rgba(0,0,0,0)',
+                font: { family: serifStack },
+                scene: {
+                    xaxis: { visible: false }, yaxis: { visible: false }, zaxis: { visible: false },
+                    // Slightly adjusted camera angle for better initial view
+                    camera: { eye: { x: 1.5, y: 1.5, z: 0.8 } }
+                },
+                showlegend: false,
+                // Important for responsiveness: tells Plotly to utilize container space
+                autosize: true
+            };
+
+            Plotly.react(plotContainer, [surface, pathR, pathP, labels, ts], layout, {
+                displayModeBar: false,
+                responsive: true});
+        }
+
+        inputC.addEventListener('input', update);
+        inputW.addEventListener('input', update);
+
+
+        window.addEventListener('resize', function() {
+            setTimeout(() => {
+                    Plotly.Plots.resize(plotContainer);
+                }, 100);
+        });
+        update();
+    })();
+
+
+// fig2
+(function() {
+    const ink = '#111111';
+    const subtle = '#888888';
+    const fontStack = '"ETbb", serif';
+
+    function renderHammond(id, title, rY, tsX, tsY, pY) {
+        const trace = {
+            x: [0, tsX, 1],
+            y: [rY, tsY, pY],
+            type: 'scatter',
+            mode: 'lines',
+            line: { shape: 'spline', color: ink, width: 2.5 },
+            hoverinfo: 'none'
+        };
+
+        const layout = {
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            margin: { l: 50, r: 50, t: 70, b: 50 },
+            showlegend: false,
+            autosize: true,
+            xaxis: { showgrid: false, zeroline: false, showticklabels: false, range: [-0.15, 1.15] },
+            yaxis: { showgrid: false, zeroline: false, showticklabels: false, range: [0, 1] },
+            shapes: [
+                // Horizontal baseline from R (start of curve)
+                { type: 'line', x0: 0, x1: 1, y0: rY, y1: rY, line: { color: subtle, width: 1, dash: 'dot' } },
+                // Vertical for ΔG‡ at exactly tsX
+                { type: 'line', x0: tsX, x1: tsX, y0: rY, y1: tsY, line: { color: subtle, width: 1 } },
+                // Vertical for ΔG° at exactly x=1 (end of curve)
+                { type: 'line', x0: 1, x1: 1, y0: rY, y1: pY, line: { color: subtle, width: 1 } }
+            ],
+            annotations: [
+                { x: 0.5, y: 1.15, xref: 'paper', yref: 'paper', text: title, showarrow: false, font: { family: fontStack, size: 18, color: ink } },
+                // R label at start of curve
+                { x: 0, y: rY, text: 'R', showarrow: false, font: { family: fontStack, size: 17 }, xanchor: 'right', xshift: -10 },
+                // TS label at peak
+                { x: tsX, y: tsY, text: '‡', showarrow: false, font: { family: fontStack, size: 26 }, yshift: 25 },
+                // P label at end of curve
+                { x: 1, y: pY, text: 'P', showarrow: false, font: { family: fontStack, size: 17 }, xanchor: 'left', xshift: 10 },
+                // Measurement labels
+                { x: tsX, y: (rY + tsY) / 2, text: 'ΔG<sup>‡</sup>', showarrow: false, font: { family: fontStack, size: 13, color: subtle }, xanchor: 'right', xshift: -8 },
+                { x: 1, y: (rY + pY) / 2, text: 'ΔG°', showarrow: false, font: { family: fontStack, size: 13, color: subtle }, xanchor: 'left', xshift: 15 }
+            ]
+        };
+
+        Plotly.newPlot(id, [trace], layout, { responsive: true, displayModeBar: false });
+    }
+
+    // Coordinates: [ID, Title, Reactant Y, TS-X, TS-Y, Product Y]
+    renderHammond('plotEx', 'Exergonic (Early TS)', 0.55, 0.25, 0.8, 0.15);
+    renderHammond('plotEn', 'Endergonic (Late TS)', 0.25, 0.75, 0.9, 0.65);
+
+    // Robust ResizeObserver for layout shifts
+    const ro = new ResizeObserver(() => {
+        ['plotEx', 'plotEn'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) Plotly.Plots.resize(el);
+        });
+    });
+    ro.observe(document.querySelector('.hammond-flex-container'));
+})();
+
+// fig3
+(function() {
+    const plot3 = document.getElementById('plot3');
+    const inputs = {
+        g00: document.getElementById('g00'),
+        g11: document.getElementById('g11'),
+        g01: document.getElementById('g01'),
+        g10: document.getElementById('g10')
+    };
+
+    const res = 80;
+    const grid = Array.from({length: res+1}, (_, i) => i/res);
+    const serifStack = '"ETbb", "Crimson Pro", serif';
+
+    function calculateMOJ(x, y, G00, G11, G01, G10) {
+        // Bilinear interpolation of corners
+        // const base = (1-x)*(1-y)*G00 + x*(1-y)*G10 + (1-x)*y*G01 + x*y*G11; //old
+        const base = (1-x)*y*G01 + x*(1-y)*G10 + x*y*G11 + (1-x)*(1-y)*G00;
+        // Central barrier to maintain the saddle
+        const barrier = 22 * (4 * x * (1-x)) * (4 * y * (1-y));
+        return base + barrier;
+    }
+
+    function update() {
+        const v = {
+            g00: parseFloat(inputs.g00.value),
+            g11: parseFloat(inputs.g11.value),
+            g01: parseFloat(inputs.g01.value),
+            g10: parseFloat(inputs.g10.value)
+        };
+
+        const z = grid.map(y => grid.map(x => calculateMOJ(x, y, v.g00, v.g11, v.g01, v.g10)));
+
+        const data = [{
+            z: z, x: grid, y: grid,
+            type: 'contour',
+            showscale: false,
+            ncontours: 40,
+            colorscale: [[0, '#b0b0b0'], [0.4, '#f0f0f0'], [0.5, '#F5F4EF'], [0.6, '#f0f0f0'], [1, '#b0b0b0']],
+            line: { width: 0.4, color: '#ccc' },
+            contours: { coloring: 'heatmap', showlabels: true, labelfont: { family: serifStack, size: 9 } },
+            hoverinfo: 'none'
+        }, {
+            x: [0.5], y: [0.5], mode: 'text', type: 'scatter',
+            text: ['‡'], textfont: { family: serifStack, size: 28, color: '#000' },
+            hoverinfo: 'none'
+        }];
+
+        const layout = {
+            margin: {l:50, r:50, b:50, t:20},
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            xaxis: { title: 'Bond Breaking', range: [-0.05, 1.05], visible: false, showgrid: false, fixedrange: true, font: {family: serifStack} },
+            yaxis: { title: 'Bond Forming', range: [-0.05, 1.05], visible: false, showgrid: false, fixedrange: true, font: {family: serifStack} },
+            annotations: [
+                { x: 0, y: 1, text: 'Reactant', showarrow: false, font: {family: serifStack, size: 13}, xshift:15, yshift: 15 },
+                { x: 1, y: 0, text: 'Product', showarrow: false, font: {family: serifStack, size: 13}, xshift:-15, yshift: -15 },
+                { x: 1, y: 1, text: 'Associative Intermediate', showarrow: false, font: {family: serifStack, size: 13, color: '#c0392b'}, xshift:-30, yshift: 15 },
+                { x: 0, y: 0, text: 'Dissociative Intermediate', showarrow: false, font: {family: serifStack, size: 13, color: '#2980b9'}, xshift:30, yshift: -15 }
+            ],
+            xaxis: { 
+                title: {
+                    text: 'Progress of B–C Bond Formation (0 → 1)',
+                    font: { family: 'ETbb, serif', size: 14 }
+                },
+                showarrow: false,
+                showticklabels:false,
+                range: [0.0, 1.0],
+                fixedrange: true
+            },
+            yaxis: { 
+                title: {
+                    text: 'Progress of A–B Bond Formation (0 → 1)',
+                    font: { family: 'ETbb, serif', size: 14 }
+                },
+                showarrow: false,
+                showticklabels:false,
+                range: [0.0, 1.0],
+                fixedrange: true
+            },
+        };
+
+        Plotly.react(plot3, data, layout, {responsive: true, displayModeBar: false});
+    }
+
+    // Initial and event-based updates
+    Object.values(inputs).forEach(slider => slider.addEventListener('input', update));
+    update();
+
+    // Final fix for phone responsiveness
+    const ro = new ResizeObserver(() => {
+        window.requestAnimationFrame(() => {
+            Plotly.Plots.resize(plot3);
+        });
+    });
+    ro.observe(plot3);
+})();
+
+// fig 4
+
+        (function() {
+    const plot4 = document.getElementById('plot4');
+    const s = {
+        e00: document.getElementById('v00'), e11: document.getElementById('v11'),
+        e01: document.getElementById('v01'), e10: document.getElementById('v10')
+    };
+    const font = '"ETbb", "Crimson Pro", serif';
+
+    // Helper to keep TS within the [0, 1] square
+    const clamp = (val, min, max) => Math.min(Math.max(val, min), max);
+
+    function getZ(x, y, G00, G11, G01, G10) {
+        const base = (1-x)*(1-y)*G00 + x*(1-y)*G10 + (1-x)*y*G01 + x*y*G11;
+        const barrier = 22 * (4 * x * (1-x)) * (4 * y * (1-y));
+        return base + barrier;
+    }
+
+    function update() {
+        const v = {
+        e00: parseFloat(s.e00.value), e11: parseFloat(s.e11.value),
+        e01: parseFloat(s.e01.value), e10: parseFloat(s.e10.value)
+        };
+
+        const center = 0.5;
+        const sensitivity = 0.012;
+        const dP = (v.e10 - v.e01) * sensitivity;
+        const dPerp = (v.e11 - v.e00) * sensitivity;
+        const netX = clamp(center + dP + dPerp, 0, 1);
+        const netY = clamp(center - dP + dPerp, 0, 1);
+        const pEndX = clamp(center + dP, 0, 1);
+        const pEndY = clamp(center - dP, 0, 1);
+        const perpEndX = clamp(center + dPerp, 0, 1);
+        const perpEndY = clamp(center + dPerp, 0, 1);
+
+        
+        const res = 70;
+        const grid = Array.from({length: res+1}, (_, i) => i/res);
+        const z = grid.map(y => grid.map(x => getZ(x, y, v.e00, v.e11, v.e01, v.e10)));
+
+        const traces = [
+            {
+                z: z, x: grid, y: grid, type: 'contour', showscale: false, ncontours: 40,
+                colorscale: [[0, '#b0b0b0'], [0.5, '#F5F4EF'], [1, '#b0b0b0']],
+                line: { width: 0.4, color: '#ccc' },
+                contours: { coloring: 'heatmap', showlabels: true, labelfont: { family: font, size: 10, color: '#888' } },
+                hoverinfo: 'skip'
+            },
+            { x: [center, pEndX], y: [center, pEndY], mode: 'lines', line: {color: '#111', width: 2, dash: 'dot'} },
+            { x: [center, perpEndX], y: [center, perpEndY], mode: 'lines', line: {color: '#111', width: 2, dash: 'dot'} },
+            { x: [center, netX], y: [center, netY], mode: 'lines', line: {color: '#111', width: 2.5} },
+            {
+                x: [netX], y: [netY], mode: 'markers+text',
+                marker: {size: 14, symbol: 'diamond', color: '#111'},
+                text: ['‡'], textfont: {size: 26, family: font}, textposition: 'top center'
+            }
+        ];
+
+        const layout = {
+            margin: {l:50, r:50, b:50, t:20},
+            paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)',
+            xaxis: { title: 'Bond Breaking', range: [-0.1, 1.1], showticklabels:false, visible: false, showgrid: false, fixedrange: true, font: {family: font} },
+            yaxis: { title: 'Bond Forming', range: [-0.1, 1.1], showticklabels:false, visible: false, showgrid: false, fixedrange: true, font: {family: font} },
+            showlegend: false,
+            annotations: [
+                { x: 0, y: 1, text: 'Reactant', showarrow: false, font: {family: font, size: 13}, xshift:15, yshift: 15 },
+                { x: 1, y: 0, text: 'Product', showarrow: false, font: {family: font, size: 13}, xshift:-15, yshift: -15 },
+                { x: 1, y: 1, text: 'Associative Intermediate', showarrow: false, font: {family: font, size: 13, color: '#c0392b'}, xshift:-30, yshift: 15 },
+                { x: 0, y: 0, text: 'Dissociative Intermediate', showarrow: false, font: {family: font, size: 13, color: '#2980b9'}, xshift:30, yshift: -15 },
+                
+                // { x: 0, y: 1, text: 'Reactant', showarrow: false, font: {family: font, size: 13}, yshift: 15, xshift: -15 },
+                // { x: 1, y: 0, text: 'Product', showarrow: false, font: {family: font, size: 13}, yshift: -15, xshift: 15 },
+                // { x: 1, y: 1, text: 'Associative Intermediate', showarrow: false, font: {family: font, size: 13, color: '#c0392b'}, yshift: 15, xshift: 15 },
+                // { x: 0, y: 0, text: 'Dissociative Intermediate', showarrow: false, font: {family: font, size: 13, color: '#2980b9'}, yshift: -15, xshift: -15 },
+                // Vector labels - adjusted shifts for visibility
+                { x: pEndX, y: pEndY, text: 'V<sub>∥</sub>', showarrow: false, font: {color: '#111'}, xshift: 12, yshift: 12, opacity: Math.abs(dP) > 0.01 ? 1 : 0 },
+                { x: perpEndX, y: perpEndY, text: 'V<sub>⊥</sub>', showarrow: false, font: {color: '#111'}, xshift: 12, yshift: -12, opacity: Math.abs(dPerp) > 0.01 ? 1 : 0 }
+            ],
+            xaxis: { 
+                title: {
+                    text: 'Progress of B–C Bond Formation (0 → 1)',
+                    font: { family: 'ETbb, serif', size: 14 }
+                },
+                showarrow: false,
+                showticklabels:false,
+                range: [0.0, 1.0],
+                fixedrange: true
+            },
+            yaxis: { 
+                title: {
+                    text: 'Progress of A–B Bond Formation (0 → 1)',
+                    font: { family: 'ETbb, serif', size: 14 }
+                },
+                showarrow: false,
+                showticklabels:false,
+                range: [0.0, 1.0],
+                fixedrange: true
+            },
+        };
+
+        Plotly.react(plot4, traces, layout, {responsive: true, displayModeBar: false});
+    }
+
+    window.resetVectors = () => {
+        s.e00.value = 0; s.e11.value = 0; s.e01.value = 0; s.e10.value = 0; update();
+    };
+
+    Object.values(s).forEach(el => el.addEventListener('input', update));
+    update();
+
+    const ro = new ResizeObserver(() => Plotly.Plots.resize(plot4));
+    ro.observe(plot4);
+})();
+        
+</script>
+
+</body>
+</html>
