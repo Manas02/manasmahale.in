@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FragmentBERT — Manas Mahale</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://manasmahale.in/assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://manasmahale.in/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://manasmahale.in/assets/favicon-16x16.png">
+    <link rel="manifest" href="https://manasmahale.in/assets/site.webmanifest">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="FragmentBERT — Manas Mahale">
+    <meta property="og:url" content="https://manasmahale.in/fragmentbert.html">
+    <meta property="og:image" content="https://manasmahale.in/assets/banner.jpeg">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="FragmentBERT — Manas Mahale">
+    <meta name="twitter:image" content="https://manasmahale.in/assets/banner.jpeg">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+
+        :root {
+            --bg: #F5F4EF;
+            --ink: #111111;
+            --subtle: #888888;
+            --accent: #D93025;
+            --border: #E0E0E0;
+            --max-width: 800px;
+            --slide-width: 1000px;
+        }
+
+        @font-face {
+            font-family: 'ETbb';
+            src: url('assets/ETbb-Regular.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--ink);
+            font-family: 'ETbb', serif;
+            line-height: 1.5;
+            padding: clamp(1.5rem, 5vw, 4rem);
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        nav,
+        header {
+            width: 100%;
+            max-width: var(--max-width);
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            font-family: 'Instrument Serif', serif;
+        }
+
+        @media (min-width: 768px) {
+            nav {
+                justify-content: flex-end;
+            }
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--subtle);
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--accent);
+            font-style: italic;
+        }
+
+        header {
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(2rem, 8vw, 3.5rem);
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+        }
+
+        a {
+            color: var(--ink);
+            text-underline-offset: 4px;
+            text-decoration-color: var(--accent);
+        }
+
+        a:hover {
+            color: var(--accent);
+        }
+
+        main {
+            width: 100%;
+            max-width: var(--slide-width);
+        }
+
+        #pdf-slides {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: clamp(1.5rem, 4vw, 3rem);
+            align-items: center;
+        }
+
+        .slide {
+            width: 100%;
+            background: white;
+            border: 1px solid var(--border);
+            box-shadow: 0 12px 32px rgba(17, 17, 17, 0.08);
+            display: block;
+        }
+
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+    </style>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TSDKY5VGKJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-TSDKY5VGKJ');
+    </script>
+</head>
+
+<body>
+    <nav>
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="blog.html" class="nav-link active">Blog</a>
+        <a href="marginalia.html" class="nav-link">Marginalia</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+
+    <header>
+        <h1>FragmentBERT</h1>
+    </header>
+
+    <main>
+        <div id="pdf-slides" aria-label="FragmentBERT slides"></div>
+        <div id="pdf-status" class="visually-hidden" aria-live="polite"></div>
+    </main>
+
+    <script>
+      const PDF_URL = 'https://manasmahale.in/assets/fbdd.pdf';
+
+        pdfjsLib.GlobalWorkerOptions.workerSrc =
+            'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+        const slidesContainer = document.getElementById('pdf-slides');
+        const statusElement = document.getElementById('pdf-status');
+
+        let pdfDocument = null;
+        let renderToken = 0;
+
+        async function renderPDF() {
+            const currentToken = ++renderToken;
+            slidesContainer.innerHTML = '';
+
+            try {
+                if (!pdfDocument) {
+                    pdfDocument = await pdfjsLib.getDocument(PDF_URL).promise;
+                }
+
+                const containerWidth = slidesContainer.clientWidth;
+                const devicePixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+
+                for (let pageNumber = 1; pageNumber <= pdfDocument.numPages; pageNumber++) {
+                    if (currentToken !== renderToken) return;
+
+                    const page = await pdfDocument.getPage(pageNumber);
+
+                    const baseViewport = page.getViewport({ scale: 1 });
+                    const cssScale = containerWidth / baseViewport.width;
+                    const renderScale = cssScale * devicePixelRatio;
+                    const viewport = page.getViewport({ scale: renderScale });
+
+                    const canvas = document.createElement('canvas');
+                    const context = canvas.getContext('2d', { alpha: false });
+
+                    canvas.className = 'slide';
+                    canvas.width = Math.floor(viewport.width);
+                    canvas.height = Math.floor(viewport.height);
+
+                    canvas.style.width = `${Math.floor(baseViewport.width * cssScale)}px`;
+                    canvas.style.height = `${Math.floor(baseViewport.height * cssScale)}px`;
+
+                    canvas.setAttribute('aria-label', `Slide ${pageNumber}`);
+
+                    slidesContainer.appendChild(canvas);
+
+                    await page.render({
+                        canvasContext: context,
+                        viewport
+                    }).promise;
+                }
+
+                statusElement.textContent = '';
+            } catch (error) {
+                console.error('Could not render PDF:', error);
+                statusElement.textContent = 'Could not render PDF.';
+            }
+        }
+
+        function debounce(fn, delay = 200) {
+            let timeout;
+            return function () {
+                clearTimeout(timeout);
+                timeout = setTimeout(fn, delay);
+            };
+        }
+
+        window.addEventListener('resize', debounce(renderPDF));
+        renderPDF();
+    </script>
+</body>
+</html>
