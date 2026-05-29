@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Manas & Kyra — June 15</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Special+Elite&family=VT323&display=swap" rel="stylesheet">
+<style>
+
+:root {
+  --black:  #0a0a0a;
+  --white:  #f5f0e8;
+  --cream:  #f0e8d0;
+  --amber:  #e8a020;
+  --dkgray: #333;
+  --gray:   #888;
+  --ltgray: #ccc;
+  --stripe: repeating-linear-gradient(
+    90deg,
+    var(--black) 0px, var(--black) 1px,
+    transparent  1px, transparent  3px
+  );
+  --checker: repeating-conic-gradient(var(--black) 0% 25%, var(--white) 0% 50%) 0 0 / 8px 8px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { height: 100%; background: var(--black); }
+
+body {
+  font-family: 'Special Elite', 'Courier New', monospace;
+  font-size: 13px;
+  background: var(--white);
+  min-height: 100vh;
+  background-image: radial-gradient(circle at 1px 1px, var(--ltgray) 1px, transparent 0);
+  background-size: 20px 20px;
+  padding: 0;
+  overflow-x: hidden;
+  cursor: default;
+}
+
+/* ══ MENU BAR ══ */
+#menubar {
+  position: sticky;
+  top: 0; left: 0; right: 0;
+  height: 26px;
+  background: var(--black);
+  color: var(--white);
+  display: flex;
+  align-items: stretch;
+  padding: 0;
+  z-index: 9000;
+  border-bottom: 3px solid var(--amber);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  letter-spacing: 0.02em;
+  user-select: none;
+}
+.mb-apple {
+  font-size: 18px;
+  padding: 0 12px;
+  cursor: pointer;
+  font-family: serif;
+  display: flex; align-items: center;
+  position: relative;
+}
+.mb-apple:hover { color: var(--amber); }
+
+/* Menu items with dropdowns */
+.mb-menu {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+}
+.mb-menu-label {
+  padding: 0 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  height: 100%;
+}
+.mb-menu-label:hover,
+.mb-menu.open .mb-menu-label {
+  background: var(--white);
+  color: var(--black);
+}
+.mb-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: var(--white);
+  border: 2px solid var(--black);
+  border-top: none;
+  box-shadow: 4px 4px 0 var(--black);
+  z-index: 9999;
+  min-width: 220px;
+  color: var(--black);
+}
+.mb-menu.open .mb-dropdown { display: block; }
+.mb-dd-item {
+  padding: 8px 14px;
+  cursor: pointer;
+  font-size: 8px;
+  font-family: 'Press Start 2P', monospace;
+  letter-spacing: 0.02em;
+  line-height: 1.6;
+  border-bottom: 1px solid var(--ltgray);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.mb-dd-item:last-child { border-bottom: none; }
+.mb-dd-item:hover { background: var(--black); color: var(--white); }
+.mb-dd-item.disabled { color: var(--gray); cursor: default; }
+.mb-dd-item.disabled:hover { background: transparent; color: var(--gray); }
+.mb-dd-sep { border-top: 2px solid var(--black); margin: 2px 0; }
+.mb-dd-shortcut { font-size: 7px; opacity: 0.6; white-space: nowrap; }
+
+#mb-clock {
+  margin-left: auto;
+  font-size: 16px;
+  padding-right: 12px;
+  padding-left: 10px;
+  color: var(--amber);
+  font-family: 'VT323', monospace;
+  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+}
+
+/* ══ LAYOUT ══ */
+.desktop {
+  width: 100%;
+  padding: 12px;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr;
+}
+
+/* ══ MAC WINDOW ══ */
+.mac-window {
+  background: var(--white);
+  border: 3px solid var(--black);
+  box-shadow: 6px 6px 0 var(--black);
+  overflow: hidden;
+  width: 100%;
+}
+.mac-window.accent {
+  border-color: var(--black);
+  background: var(--black);
+  color: var(--white);
+  box-shadow: 6px 6px 0 var(--amber);
+}
+.mac-titlebar {
+  background: var(--stripe);
+  background-color: var(--black);
+  border-bottom: 3px solid var(--black);
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+  min-height: 26px;
+}
+.mac-window.accent .mac-titlebar {
+  background: var(--stripe);
+  background-color: var(--amber);
+  border-bottom: 3px solid var(--black);
+}
+.mac-close-box {
+  width: 14px; height: 14px;
+  border: 2px solid var(--black);
+  background: var(--white);
+  flex-shrink: 0;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 8px; line-height: 1;
+}
+.mac-close-box:hover { background: var(--black); color: var(--white); }
+.mac-window.accent .mac-close-box { border-color: var(--black); background: var(--black); color: var(--amber); }
+.mac-window.accent .mac-close-box:hover { background: var(--amber); color: var(--black); }
+.mac-title-text {
+  flex: 1;
+  text-align: center;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  color: var(--white);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mac-window.accent .mac-title-text { color: var(--black); }
+.mac-zoom-box {
+  width: 14px; height: 14px;
+  border: 2px solid var(--black);
+  background: var(--white);
+  flex-shrink: 0;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 8px;
+}
+.mac-zoom-box:hover { background: var(--black); color: var(--white); }
+.mac-window.accent .mac-zoom-box { background: var(--black); color: var(--amber); border-color: var(--black); }
+.mac-window.accent .mac-zoom-box:hover { background: var(--amber); color: var(--black); }
+.mac-content { padding: 18px 20px; }
+.mac-window.accent .mac-content { color: var(--white); }
+
+/* ══ HERO ══ */
+.hero-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(22px, 6vw, 52px);
+  line-height: 1.3;
+  color: var(--white);
+  text-align: center;
+  margin-bottom: 10px;
+}
+.hero-sub {
+  font-family: 'Special Elite', monospace;
+  font-size: clamp(14px, 3vw, 20px);
+  color: #ccc;
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* ══ COUNTDOWN ══ */
+.cd-outer {
+  background: var(--black);
+  padding: 16px 12px 10px;
+  text-align: center;
+}
+#cd {
+  font-family: 'VT323', monospace;
+  font-size: clamp(44px, 14vw, 96px);
+  color: var(--amber);
+  letter-spacing: 4px;
+  line-height: 1;
+  display: block;
+}
+.cd-labels {
+  display: flex;
+  justify-content: space-around;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  color: var(--white);
+  margin-top: 6px;
+  letter-spacing: 0.05em;
+}
+
+/* ══ SECTION BAR ══ */
+.section-bar {
+  background: var(--black);
+  color: var(--white);
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(11px, 3vw, 18px);
+  padding: 12px 16px;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 3px solid var(--black);
+}
+.section-bar.amber { background: var(--amber); color: var(--black); }
+.section-bar .pill {
+  font-size: 9px;
+  border: 2px solid currentColor;
+  padding: 2px 8px;
+  opacity: 0.7;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ══ INFO TABLE ══ */
+.info-t {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Special Elite', monospace;
+  font-size: clamp(13px, 2.5vw, 16px);
+}
+.info-t td {
+  padding: 10px 8px;
+  vertical-align: top;
+  border-bottom: 1px solid var(--ltgray);
+  line-height: 1.55;
+}
+.info-t td:first-child {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  color: var(--dkgray);
+  width: 80px;
+  padding-top: 14px;
+  white-space: nowrap;
+}
+.info-t tr:last-child td { border-bottom: none; }
+.night-inner { background: var(--black); color: var(--white); padding: 18px 20px; }
+.night-inner .info-t td { border-bottom-color: #333; color: var(--white); }
+.night-inner .info-t td:first-child { color: var(--amber); }
+
+/* ══ NO GIFTS ══ */
+.gifts-inner {
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+.gifts-icon-col {
+  background: var(--black);
+  color: var(--amber);
+  font-size: clamp(40px, 10vw, 72px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  min-width: 80px;
+  border-right: 3px solid var(--black);
+  line-height: 1;
+}
+.gifts-text-col {
+  padding: 18px 20px;
+  font-family: 'Special Elite', monospace;
+  font-size: clamp(13px, 2.5vw, 16px);
+  line-height: 1.7;
+}
+.gifts-headline {
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(10px, 2.5vw, 14px);
+  margin-bottom: 12px;
+}
+
+/* ══ FOLDER ══ */
+.folder-empty {
+  background: var(--cream);
+  border: 3px dashed var(--ltgray);
+  padding: 32px 20px;
+  text-align: center;
+  font-family: 'Special Elite', monospace;
+}
+.folder-icon-big { font-size: 56px; display: block; margin-bottom: 10px; }
+.folder-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  margin-bottom: 10px;
+}
+.folder-sub { font-size: 13px; color: var(--gray); line-height: 1.7; }
+
+/* ══ RSVP ══ */
+.rsvp-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: none;
+}
+.rsvp-cell {
+  padding: 18px 14px;
+  border-right: 3px solid var(--black);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.rsvp-cell:last-child { border-right: none; }
+.rsvp-cell-label { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--gray); }
+.rsvp-cell-title { font-family: 'Press Start 2P', monospace; font-size: clamp(9px, 2.5vw, 12px); line-height: 1.5; }
+.mac-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 18px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  color: var(--black);
+  background: var(--white);
+  border: 3px solid var(--black);
+  box-shadow: 4px 4px 0 var(--black);
+  cursor: pointer;
+  transition: transform .07s, box-shadow .07s;
+  line-height: 1.4;
+  text-align: center;
+}
+.mac-btn:hover { background: var(--black); color: var(--white); }
+.mac-btn:active { transform: translate(4px,4px); box-shadow: none; }
+.mac-btn.amber-btn { background: var(--amber); border-color: var(--black); box-shadow: 4px 4px 0 var(--black); color: var(--black); }
+.mac-btn.amber-btn:hover { background: var(--black); color: var(--amber); }
+.mac-btn.full { width: 100%; }
+.rsvp-both-bar {
+  background: var(--amber);
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  border-top: 3px solid var(--black);
+  flex-wrap: wrap;
+}
+.rsvp-both-text {
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(9px, 2.5vw, 13px);
+  color: var(--black);
+  line-height: 1.5;
+}
+.rsvp-footer {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 14px 20px;
+  border-top: 2px solid var(--ltgray);
+  background: var(--cream);
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ══ CHECKER BAR ══ */
+.checker-bar {
+  height: 14px;
+  background: var(--checker);
+  border-top: 2px solid var(--black);
+  border-bottom: 2px solid var(--black);
+}
+
+/* ══ POPUP ══ */
+.popup {
+  position: fixed;
+  background: var(--white);
+  border: 3px solid var(--black);
+  box-shadow: 6px 6px 0 var(--black);
+  z-index: 8000;
+  width: 320px;
+  max-width: 94vw;
+  display: none;
+  font-family: 'Special Elite', monospace;
+}
+.popup.open { display: block; }
+.popup-body {
+  padding: 18px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  font-size: 14px;
+  line-height: 1.65;
+}
+.popup-icon { font-size: 36px; flex-shrink: 0; line-height: 1; margin-top: 2px; }
+.popup-btns { padding: 0 18px 16px; display: flex; justify-content: flex-end; gap: 8px; }
+.popup strong {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  display: block;
+  margin-bottom: 10px;
+  letter-spacing: 0.04em;
+}
+
+/* ══ PARTY IS ON ══ */
+#party-on {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--black);
+  z-index: 99999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  overflow: hidden;
+}
+#party-on.show { display: flex; }
+.po-eyebrow {
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(8px, 2vw, 11px);
+  color: var(--amber);
+  letter-spacing: 0.3em;
+  margin-bottom: 20px;
+}
+.po-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(28px, 9vw, 80px);
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 20px;
+  animation: blinkW 0.9s step-end infinite;
+}
+.po-amber { color: var(--amber); }
+.po-divider { width: 100%; max-width: 400px; height: 3px; background: var(--amber); margin: 18px auto; }
+.po-detail {
+  font-family: 'Special Elite', monospace;
+  font-size: clamp(14px, 3vw, 20px);
+  color: #ccc;
+  max-width: 400px;
+  line-height: 1.9;
+  margin-bottom: 30px;
+}
+.po-footnote {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  color: #444;
+  letter-spacing: 0.1em;
+  margin-top: 10px;
+}
+@keyframes blinkW { 0%,100%{opacity:1} 50%{opacity:0.15} }
+
+/* ══ HTTP.CAT RAIN ══ */
+.cat-img-tile {
+  position: fixed;
+  pointer-events: none;
+  z-index: 50000;
+  border: 3px solid var(--black);
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.5);
+  object-fit: cover;
+  animation: catImgFall linear forwards;
+  background: #ddd;
+}
+@keyframes catImgFall {
+  0%   { opacity: 0; transform: translateY(-200px) rotate(var(--r1)); }
+  8%   { opacity: 1; }
+  88%  { opacity: 1; }
+  100% { opacity: 0; transform: translateY(0px) rotate(var(--r2)); }
+}
+
+/* ══ RESPONSIVE ══ */
+@media (max-width: 480px) {
+  .rsvp-grid { grid-template-columns: 1fr; }
+  .rsvp-cell { border-right: none; border-bottom: 3px solid var(--black); }
+  .rsvp-cell:last-child { border-bottom: none; }
+  .gifts-icon-col { min-width: 60px; padding: 14px; }
+  .mac-btn { font-size: 8px; padding: 9px 12px; }
+  .mac-content { padding: 14px; }
+}
+
+/* misc */
+.press { font-family: 'Press Start 2P', monospace; }
+.elite { font-family: 'Special Elite', monospace; }
+
+/* ══════════════════════════════════════
+   PRINT — single-page broadsheet poster
+══════════════════════════════════════ */
+@media print {
+
+  /* Reset everything to a clean page */
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+  /* Hide all screen chrome */
+  body {
+    background: #fff !important;
+    background-image: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: 11pt;
+  }
+
+  #menubar,
+  .mac-titlebar,
+  .mac-close-box,
+  .mac-zoom-box,
+  .checker-bar,
+  .rsvp-footer,
+  .popup,
+  #party-on,
+  .cat-img-tile,
+  .mac-window:not(#print-win),
+  .desktop {
+    display: none !important;
+  }
+
+  /* ── Show the dedicated print layout ── */
+  #print-layout {
+    display: block !important;
+    width: 100%;
+    height: 100vh;
+    page-break-inside: avoid;
+    font-family: 'Press Start 2P', monospace;
+  }
+
+  /* TOP HEADER BAND — full bleed black */
+  .pl-header {
+    background: #0a0a0a !important;
+    color: #f5f0e8 !important;
+    text-align: center;
+    padding: 22pt 18pt 14pt;
+    border-bottom: 6pt solid #e8a020;
+  }
+  .pl-eyebrow {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 6pt;
+    letter-spacing: 0.4em;
+    color: #e8a020 !important;
+    margin-bottom: 10pt;
+    text-transform: uppercase;
+  }
+  .pl-names {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 36pt;
+    line-height: 1.2;
+    color: #f5f0e8 !important;
+    margin-bottom: 8pt;
+  }
+  .pl-subhead {
+    font-family: 'Special Elite', monospace;
+    font-size: 13pt;
+    color: #ccc !important;
+    letter-spacing: 0.05em;
+  }
+
+  /* AMBER DATE BAND */
+  .pl-date-band {
+    background: #e8a020 !important;
+    color: #0a0a0a !important;
+    text-align: center;
+    padding: 12pt 18pt;
+    border-bottom: 4pt solid #0a0a0a;
+  }
+  .pl-date {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 18pt;
+    line-height: 1.5;
+    color: #0a0a0a !important;
+  }
+
+  /* BODY — two-column broadsheet */
+  .pl-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-bottom: 4pt solid #0a0a0a;
+  }
+  .pl-col {
+    padding: 14pt 16pt;
+    border-right: 2pt solid #0a0a0a;
+  }
+  .pl-col:last-child { border-right: none; }
+
+  .pl-col-head {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 7pt;
+    letter-spacing: 0.15em;
+    color: #0a0a0a !important;
+    border-bottom: 2pt solid #0a0a0a;
+    padding-bottom: 5pt;
+    margin-bottom: 10pt;
+    text-transform: uppercase;
+  }
+  .pl-col-title {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 11pt;
+    line-height: 1.4;
+    color: #0a0a0a !important;
+    margin-bottom: 8pt;
+  }
+  .pl-col-body {
+    font-family: 'Special Elite', monospace;
+    font-size: 10pt;
+    line-height: 1.65;
+    color: #222 !important;
+  }
+  .pl-col-body strong {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 7pt;
+  }
+
+  /* DIVIDERS within columns */
+  .pl-rule {
+    border: none;
+    border-top: 1pt solid #0a0a0a;
+    margin: 10pt 0;
+  }
+
+  /* FOOTER BAND */
+  .pl-footer {
+    background: #0a0a0a !important;
+    color: #f5f0e8 !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10pt 18pt;
+    flex-wrap: wrap;
+    gap: 6pt;
+  }
+  .pl-footer-item {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 6pt;
+    letter-spacing: 0.15em;
+    color: #f5f0e8 !important;
+  }
+  .pl-footer-item.amber { color: #e8a020 !important; }
+
+  /* NO GIFTS callout box */
+  .pl-callout {
+    background: #f0e8d0 !important;
+    border: 3pt solid #0a0a0a !important;
+    padding: 10pt 12pt;
+    margin-top: 10pt;
+  }
+  .pl-callout-head {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 7pt;
+    margin-bottom: 6pt;
+    color: #0a0a0a !important;
+  }
+  .pl-callout-body {
+    font-family: 'Special Elite', monospace;
+    font-size: 9pt;
+    line-height: 1.6;
+    color: #333 !important;
+  }
+
+  /* RSVP print strip */
+  .pl-rsvp-strip {
+    background: #f5f0e8 !important;
+    border-top: 3pt solid #0a0a0a;
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    overflow: hidden;
+  }
+  .pl-rsvp-label {
+    background: #0a0a0a !important;
+    color: #e8a020 !important;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 6pt;
+    letter-spacing: 0.2em;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    padding: 10pt 7pt;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .pl-rsvp-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    flex: 1;
+    gap: 0;
+  }
+  .pl-rsvp-opt {
+    padding: 10pt 12pt;
+    border-right: 2pt solid #0a0a0a;
+    text-align: center;
+  }
+  .pl-rsvp-opt:last-child { border-right: none; }
+  .pl-rsvp-opt-title {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 7pt;
+    margin-bottom: 4pt;
+    color: #0a0a0a !important;
+  }
+  .pl-rsvp-opt-body {
+    font-family: 'Special Elite', monospace;
+    font-size: 8pt;
+    color: #444 !important;
+    line-height: 1.5;
+  }
+  .pl-qr-note {
+    font-family: 'Special Elite', monospace;
+    font-size: 7pt;
+    color: #888 !important;
+    margin-top: 3pt;
+    font-style: italic;
+  }
+
+  /* Decorative corner marks */
+  .pl-corner-mark {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 5pt;
+    color: #bbb !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ════ MENU BAR ════ -->
+<div id="menubar">
+  <span class="mb-apple" onclick="rainCats()" title="⌘ click for surprise">&#8984;</span>
+
+  <!-- FILE -->
+  <div class="mb-menu" id="menu-file">
+    <span class="mb-menu-label" onclick="toggleMenu('menu-file')">File</span>
+    <div class="mb-dropdown">
+      <div class="mb-dd-item" onclick="openPopup('p-new'); closeAllMenus()">
+        New Invitation… <span class="mb-dd-shortcut">⌘N</span>
+      </div>
+      <div class="mb-dd-item disabled">
+        Open… <span class="mb-dd-shortcut">⌘O</span>
+      </div>
+      <div class="mb-dd-item disabled">
+        Close <span class="mb-dd-shortcut">⌘W</span>
+      </div>
+      <div class="mb-dd-sep"></div>
+      <div class="mb-dd-item" onclick="openPopup('p-print'); closeAllMenus()">
+        Print… <span class="mb-dd-shortcut">⌘P</span>
+      </div>
+      <div class="mb-dd-sep"></div>
+      <div class="mb-dd-item" onclick="openPopup('p-quit'); closeAllMenus()">
+        Quit <span class="mb-dd-shortcut">⌘Q</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDIT -->
+  <div class="mb-menu" id="menu-edit">
+    <span class="mb-menu-label" onclick="toggleMenu('menu-edit')">Edit</span>
+    <div class="mb-dropdown">
+      <div class="mb-dd-item disabled">
+        Undo <span class="mb-dd-shortcut">⌘Z</span>
+      </div>
+      <div class="mb-dd-sep"></div>
+      <div class="mb-dd-item disabled">
+        Cut <span class="mb-dd-shortcut">⌘X</span>
+      </div>
+      <div class="mb-dd-item disabled">
+        Copy <span class="mb-dd-shortcut">⌘C</span>
+      </div>
+      <div class="mb-dd-item disabled">
+        Paste <span class="mb-dd-shortcut">⌘V</span>
+      </div>
+      <div class="mb-dd-sep"></div>
+      <div class="mb-dd-item disabled">
+        Select All <span class="mb-dd-shortcut">⌘A</span>
+      </div>
+      <div class="mb-dd-sep"></div>
+      <div class="mb-dd-item" onclick="openPopup('p-rsvp-edit'); closeAllMenus()">
+        Edit RSVP… <span class="mb-dd-shortcut">⌘R</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CALENDAR -->
+  <div class="mb-menu" id="menu-cal">
+    <span class="mb-menu-label" onclick="addToCalendar(); closeAllMenus()">Calendar</span>
+  </div>
+
+  <!-- HELP -->
+  <div class="mb-menu" id="menu-help">
+    <span class="mb-menu-label" onclick="openPopup('p-help'); closeAllMenus()">Help</span>
+  </div>
+
+  <span id="mb-clock">00:00</span>
+</div>
+
+<!-- ════ DESKTOP ════ -->
+<div class="desktop">
+
+  <!-- ── WINDOW 1: HERO ── -->
+  <div class="mac-window accent">
+    <div class="mac-titlebar">
+      <div class="mac-close-box" onclick="openPopup('p-close')">&#9632;</div>
+      <span class="mac-title-text">PARTY.EXE &#8212; MANAS &amp; KYRA &#8212; JUNE 15 2026</span>
+      <div class="mac-zoom-box" onclick="toggleWin(this)">&#9650;</div>
+    </div>
+    <div style="background:var(--black); padding-bottom:0;">
+
+      <div class="mac-content" style="padding-bottom:14px;">
+        <div class="hero-title">KYRA<br>&amp;<br>Manas</div>
+      </div>
+
+      <div class="checker-bar" style="border-color:var(--amber);"></div>
+
+      <div style="background:var(--amber);padding:14px 20px;border-top:none;border-bottom:3px solid var(--black);">
+        <div style="font-family:'Press Start 2P',monospace;font-size:clamp(14px,4vw,28px);text-align:center;color:var(--black);line-height:1.6;letter-spacing:0.02em;">
+          SUNDAY, JUNE 15<br>LISBON
+        </div>
+      </div>
+
+      <div class="checker-bar" style="border-color:var(--amber);"></div>
+
+      <div class="mac-content" style="padding-top:18px;padding-bottom:22px;">
+        <p class="hero-sub">
+          A joint birthday, held on June&nbsp;15<br>because we will both be elsewhere<br>on our actual birthdays.
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── WINDOW 2: COUNTDOWN ── -->
+  <div class="mac-window">
+    <div class="mac-titlebar">
+      <div class="mac-close-box" onclick="openPopup('p-close')">&#9632;</div>
+      <span class="mac-title-text">COUNTDOWN.SYS</span>
+      <div class="mac-zoom-box" onclick="toggleWin(this)">&#9650;</div>
+    </div>
+    <div style="padding:12px 20px 8px;background:var(--cream);">
+      <div class="press" style="font-size:8px;color:var(--gray);letter-spacing:0.1em;">PARTY BEGINS IN:</div>
+    </div>
+    <div class="cd-outer">
+      <span id="cd">-- : -- : -- : --</span>
+      <div class="cd-labels">
+        <span>DAYS</span><span>HRS</span><span>MIN</span><span>SEC</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── WINDOW 3: SCHEDULE ── -->
+  <div class="mac-window">
+    <div class="mac-titlebar">
+      <div class="mac-close-box" onclick="openPopup('p-close')">&#9632;</div>
+      <span class="mac-title-text">SCHEDULE.TXT</span>
+      <div class="mac-zoom-box" onclick="toggleWin(this)">&#9650;</div>
+    </div>
+
+    <div class="section-bar amber">
+      <span>&#9728; BEACH &amp; COOLER LIME</span>
+      <span class="pill">PART I</span>
+    </div>
+    <div class="mac-content" style="padding-top:14px;padding-bottom:14px;">
+      <table class="info-t">
+        <tr><td>WHEN</td><td>Noon, June 15 — for as long as it stays good, which will be a while</td></tr>
+        <tr><td>WHERE</td><td>TBA — pin dropping on WhatsApp before the day</td></tr>
+        <tr><td>WHAT</td><td>Swimming. Volleyball. Day-drinking at a responsible pace. Being outside like people who have their lives together.</td></tr>
+      </table>
+    </div>
+
+    <div class="section-bar">
+      <span>&#9790; SUNSET &amp; NIGHT OUT</span>
+      <span class="pill">PART II</span>
+    </div>
+    <div class="night-inner">
+      <table class="info-t">
+        <tr><td>WHEN</td><td>Sunset, June 15 — location incoming</td></tr>
+        <tr><td>THEN</td><td>Drinks. Wherever the night decides to go. You'll know when you get there.</td></tr>
+        <tr><td>POLICY</td><td>Go hard or go home. Both are valid choices. Only one is the right one.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── WINDOW 4: NO GIFTS ── -->
+  <div class="mac-window">
+    <div class="mac-titlebar">
+      <div class="mac-close-box" onclick="openPopup('p-close')">&#9632;</div>
+      <span class="mac-title-text">IMPORTANT_NOTICE.TXT &#8212; READ CAREFULLY</span>
+      <div class="mac-zoom-box" onclick="toggleWin(this)">&#9650;</div>
+    </div>
+    <div class="gifts-inner">
+      <div class="gifts-icon-col">&#128683;</div>
+      <div class="gifts-text-col">
+        <div class="gifts-headline">NO. GIFTS.</div>
+        We have said this once. This is the second time. There will not be a third, but only because we'll have confiscated it at the door.<br><br>
+        Your presence costs you nothing and means everything. A gift costs you money and means we have to find somewhere to put it, write a thank-you message, and pretend we needed it.<br><br>
+        If you genuinely cannot arrive empty-handed: snacks for the group. Something cold. Something everyone can eat. Not a thing with your name on a card that we have to store for six months before quietly donating.
+      </div>
+    </div>
+    <div class="checker-bar"></div>
+  </div>
+
+  <!-- ── WINDOW 5: PHOTOS ── -->
+  <div class="mac-window">
+    <div class="mac-titlebar">
+      <div class="mac-close-box" onclick="openPopup('p-close')">&#9632;</div>
+      <span class="mac-title-text">&#128193; PARTY_EVIDENCE &#8212; 0 ITEMS</span>
+      <div class="mac-zoom-box" onclick="toggleWin(this)">&#9650;</div>
+    </div>
+    <div class="folder-empty">
+      <span class="folder-icon-big">&#128193;</span>
+      <div class="folder-title">PARTY EVIDENCE</div>
+      <div class="folder-sub">
+        This folder is empty.<br>
+        Photos coming after June&nbsp;15.<br>
+        We will be in a state of recovery.<br>
+        <em>Please allow 48&#8211;72 hours. Possibly longer. It depends.</em>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:space-between;padding:8px 16px;background:var(--cream);border-top:2px solid var(--ltgray);">
+      <span class="press" style="font-size:7px;color:var(--gray);">0 ITEMS</span>
+      <span class="press" style="font-size:7px;color:var(--gray);">0 KB</span>
+    </div>
+  </div>
+
+  <!-- ── WINDOW 6: RSVP ── -->
+  <div class="mac-window">
+    <div class="mac-titlebar">
+      <div class="mac-close-box" onclick="openPopup('p-close')">&#9632;</div>
+      <span class="mac-title-text">RSVP.EXE &#8212; CONFIRM ATTENDANCE</span>
+      <div class="mac-zoom-box" onclick="toggleWin(this)">&#9650;</div>
+    </div>
+    <div style="padding:16px 20px 14px;border-bottom:3px solid var(--black);background:var(--cream);">
+      <div class="press" style="font-size:clamp(9px,2.5vw,12px);letter-spacing:0.04em;margin-bottom:6px;">YOU'RE INVITED. NOW CONFIRM.</div>
+      <div class="elite" style="font-size:14px;color:var(--dkgray);">Tap a button. WhatsApp opens. Send the message. You're in.</div>
+    </div>
+    <div class="rsvp-grid" style="border-top:none;">
+      <div class="rsvp-cell">
+        <div class="rsvp-cell-label">PART I</div>
+        <div class="rsvp-cell-title">&#9728;<br>VIP BEACH</div>
+        <a class="mac-btn full"
+           href="https://wa.me/?text=Hey%20Manas%20%26%20Kyra%20%E2%80%94%20I%27m%20in%20for%20the%20beach%20on%20June%2015.%20See%20you%20at%20noon."
+           target="_blank">I'M IN</a>
+      </div>
+      <div class="rsvp-cell">
+        <div class="rsvp-cell-label">PART II</div>
+        <div class="rsvp-cell-title">&#9790;<br>NIGHT OUT</div>
+        <a class="mac-btn amber-btn full"
+           href="https://wa.me/?text=Hey%20Manas%20%26%20Kyra%20%E2%80%94%20I%27m%20in%20for%20the%20night%20out%20on%20June%2015."
+           target="_blank">I'M IN</a>
+      </div>
+    </div>
+    <div class="rsvp-both-bar">
+      <div class="rsvp-both-text">BOTH.<br>OBVIOUSLY.</div>
+      <a class="mac-btn"
+         href="https://wa.me/?text=Hey%20Manas%20%26%20Kyra%20%E2%80%94%20I%27m%20in%20for%20both.%20Beach%20at%20noon%20and%20night%20out.%20June%2015."
+         target="_blank" style="font-size:clamp(9px,2.5vw,11px);">CONFIRM BOTH &#9650;</a>
+    </div>
+    <div class="rsvp-footer">
+      <button class="mac-btn" onclick="addToCalendar()">+ CALENDAR</button>
+      <button class="mac-btn" onclick="openPopup('p-cant')" style="background:var(--cream);">I CAN'T MAKE IT</button>
+    </div>
+  </div>
+
+</div><!-- /desktop -->
+
+<!-- ════ PARTY IS ON ════ -->
+<div id="party-on">
+  <div class="po-eyebrow">&#9608;&#9608;&#9608; SYSTEM ALERT &#9608;&#9608;&#9608;</div>
+  <div class="po-title">PARTY<br><span class="po-amber">IS ON.</span></div>
+  <div class="po-divider"></div>
+  <div class="po-detail">
+    TODAY. JUNE 15. LISBON.<br>
+    Beach from noon.<br>
+    Sunset after.<br>
+    Night after that.<br><br>
+    You know where to go.<br>
+    If you don't, check WhatsApp.
+  </div>
+  <button class="mac-btn amber-btn" style="font-size:10px;padding:14px 28px;" onclick="document.getElementById('party-on').classList.remove('show')">
+    I'M ALREADY ON MY WAY
+  </button>
+  <div class="po-footnote">THIS MESSAGE WILL SELF-DESTRUCT ONCE YOU LEAVE THE HOUSE</div>
+</div>
+
+<!-- ════ POPUPS ════ -->
+
+<div class="popup" id="p-close" style="top:18%;left:50%;transform:translateX(-50%);">
+  <div class="mac-titlebar">
+    <div class="mac-close-box" onclick="closePopup('p-close')">&#9632;</div>
+    <span class="mac-title-text">ERROR &#8212; party.exe</span>
+  </div>
+  <div class="popup-body">
+    <span class="popup-icon">&#128683;</span>
+    <div><strong>CANNOT CLOSE.</strong>The invitation exists independently of whether you acknowledge it.<br><br>June&nbsp;15 is happening either way.</div>
+  </div>
+  <div class="popup-btns"><button class="mac-btn" onclick="closePopup('p-close')">OK</button></div>
+</div>
+
+<div class="popup" id="p-cant" style="top:20%;left:50%;transform:translateX(-50%);">
+  <div class="mac-titlebar">
+    <div class="mac-close-box" onclick="closePopup('p-cant')">&#9632;</div>
+    <span class="mac-title-text">NOTED.</span>
+  </div>
+  <div class="popup-body">
+    <span class="popup-icon">&#128064;</span>
+    <div><strong>UNFORTUNATE.</strong>We'll miss you. We'll mention it exactly once, warmly, and then move on.<br><br>Come to the next one.</div>
+  </div>
+  <div class="popup-btns"><button class="mac-btn" onclick="closePopup('p-cant')">UNDERSTOOD</button></div>
+</div>
+
+<div class="popup" id="p-help" style="top:16%;left:50%;transform:translateX(-50%);">
+  <div class="mac-titlebar">
+    <div class="mac-close-box" onclick="closePopup('p-help')">&#9632;</div>
+    <span class="mac-title-text">HELP &#8212; FAQ</span>
+  </div>
+  <div class="popup-body" style="display:block;font-size:14px;line-height:1.7;">
+    <div class="press" style="font-size:9px;margin-bottom:12px;">FREQUENTLY ASKED QUESTIONS</div>
+    <em>Q: What do I bring?</em><br>A: Yourself. See: No Gifts window.<br><br>
+    <em>Q: What do I wear?</em><br>A: Something you feel good in.<br><br>
+    <em>Q: Is this real?</em><br>A: Yes. June 15. Noon. Lisbon.<br><br>
+    <em>Q: Why is this a website?</em><br>A: We wanted to.
+  </div>
+  <div class="popup-btns"><button class="mac-btn" onclick="closePopup('p-help')">CLOSE</button></div>
+</div>
+
+<div class="popup" id="p-reminder" style="top:14%;left:50%;transform:translateX(-50%);">
+  <div class="mac-titlebar">
+    <div class="mac-close-box" onclick="closePopup('p-reminder')">&#9632;</div>
+    <span class="mac-title-text">SYSTEM &#8212; REMINDER</span>
+  </div>
+  <div class="popup-body">
+    <span class="popup-icon">&#128276;</span>
+    <div><strong>JUNE 15 IS APPROACHING.</strong>You have not yet confirmed attendance.<br><br>This is a non-judgmental, fully automated, completely sincere nudge.</div>
+  </div>
+  <div class="popup-btns">
+    <button class="mac-btn" onclick="closePopup('p-reminder')">LATER</button>
+    <button class="mac-btn amber-btn" onclick="closePopup('p-reminder')">OK</button>
+  </div>
+</div>
+
+<!-- File menu popups -->
+<div class="popup" id="p-new" style="top:18%;left:50%;transform:translateX(-50%);">
+  <div class="mac-titlebar">
+    <div class="mac-close-box" onclick="closePopup('p-new')">&#9632;</div>
+    <span class="mac-title-text">New Invitation</span>
+  </div>
+  <div class="popup-body">
+    <span class="popup-icon">&#128196;</span>
+    <div><strong>NOT AVAILABLE.</strong>There is only one party. You cannot create a second one from inside the first one.<br><br>Please close this dialog and scroll down to RSVP.</div>
+  </div>
+  <div class="popup-btns"><button class="mac-btn" onclick="closePopup('p-new')">OK</button></div>
+</div>
+
+<div class="popup" id="p-print" style="top:18%;left:50%;transform:translateX(-50%);">
+  <div class="mac-titlebar">
+    <div class="mac-close-box" onclick="closePopup('p-print')">&#9632;</div>
+    <span class="mac-title-text">Print</span>
+  </div>
+  <div class="popup-body">
+    <span class="popup-icon">&#128438;</span>
+    <div><strong>PRINTING.</strong>You are printing a WhatsApp invitation. We respect the commitment.<br><br>Please laminate it.</div>
+  </div>
+  <div class="popup-btns">
+    <button class="mac-btn" onclick="window.print();closePopup('p-print')">PRINT</button>
+    <button class="mac-btn" onclick="closePopup('p-print')">CANCEL</button>
+  </div>
+</div>
+
+<div class="popup" id="p-quit" style="top:18%;left:50%;transform:translateX(-50%);">
+  <div class="mac-titlebar">
+    <div class="mac-close-box" onclick="closePopup('p-quit')">&#9632;</div>
+    <span class="mac-title-text">Quit</span>
+  </div>
+  <div class="popup-body">
+    <span class="popup-icon">&#128169;</span>
+    <div><strong>ARE YOU SURE?</strong>Quitting will not cancel the party. The party exists at the OS level and cannot be terminated by the user.</div>
+  </div>
+  <div class="popup-btns">
+    <button class="mac-btn" onclick="closePopup('p-quit')">STAY</button>
+    <button class="mac-btn" onclick="closePopup('p-quit')">QUIT ANYWAY</button>
+  </div>
+</div>
+
+<div class="popup" id="p-rsvp-edit" style="top:18%;left:50%;transform:translateX(-50%);">
+  <div class="mac-titlebar">
+    <div class="mac-close-box" onclick="closePopup('p-rsvp-edit')">&#9632;</div>
+    <span class="mac-title-text">Edit RSVP</span>
+  </div>
+  <div class="popup-body">
+    <span class="popup-icon">&#9998;</span>
+    <div><strong>EDIT MODE.</strong>Your current RSVP status: <em>not confirmed.</em><br><br>To edit, scroll to the RSVP window and tap a button. That's the edit. That's all it is.</div>
+  </div>
+  <div class="popup-btns"><button class="mac-btn" onclick="closePopup('p-rsvp-edit')">UNDERSTOOD</button></div>
+</div>
+
+<!-- ════ PRINT LAYOUT (hidden on screen, shown on print) ════ -->
+<div id="print-layout" style="display:none;">
+
+  <!-- Header -->
+  <div class="pl-header">
+    <div class="pl-eyebrow">&#9608;&#9608; You Are Invited &#9608;&#9608;</div>
+    <div class="pl-names">MANAS<br>&amp; KYRA</div>
+    <div class="pl-subhead">A Joint Birthday Party — Lisbon</div>
+  </div>
+
+  <!-- Date band -->
+  <div class="pl-date-band">
+    <div class="pl-date">SUNDAY, JUNE 15, 2026<br>NOON &#8594; MIDNIGHT</div>
+  </div>
+
+  <!-- Two-column body -->
+  <div class="pl-body">
+
+    <!-- LEFT: Schedule -->
+    <div class="pl-col">
+      <div class="pl-col-head">&#9728; Part I — Beach &amp; Cooler Lime</div>
+      <div class="pl-col-title">From Noon</div>
+      <div class="pl-col-body">
+        Location TBA — pin on WhatsApp before the day.<br><br>
+        Swimming. Volleyball. Day-drinking at a pace your body will forgive. Being outside like people who have their lives together.
+      </div>
+
+      <hr class="pl-rule">
+
+      <div class="pl-col-head">&#9790; Part II — Sunset &amp; Night Out</div>
+      <div class="pl-col-title">From Sunset</div>
+      <div class="pl-col-body">
+        Location incoming. Drinks. Wherever the night decides to go.<br><br>
+        <strong>Policy:</strong> Go hard or go home. Both are valid. Only one is correct.
+      </div>
+    </div>
+
+    <!-- RIGHT: No Gifts + details -->
+    <div class="pl-col">
+      <div class="pl-col-head">&#128683; Important Notice</div>
+      <div class="pl-callout">
+        <div class="pl-callout-head">NO. GIFTS.</div>
+        <div class="pl-callout-body">
+          Your presence costs nothing and means everything.<br>
+          A gift costs money and means we have to find somewhere to put it, write a thank-you message, and pretend we needed it.<br><br>
+          Snacks for the group: permitted. Anything with a bow: please reconsider.
+        </div>
+      </div>
+
+      <hr class="pl-rule">
+
+      <div class="pl-col-head">&#128197; Save The Date</div>
+      <div class="pl-col-body">
+        Sunday, June 15, 2026 &mdash; Noon to Midnight<br>
+        Lisbon, Portugal<br><br>
+        Both Manas and Kyra will be elsewhere on their actual birthdays. We find this logistically convenient.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RSVP strip -->
+  <div class="pl-rsvp-strip">
+    <div class="pl-rsvp-label">RSVP</div>
+    <div class="pl-rsvp-options">
+      <div class="pl-rsvp-opt">
+        <div class="pl-rsvp-opt-title">&#9728; BEACH</div>
+        <div class="pl-rsvp-opt-body">Part I only<br>Noon onwards</div>
+        <div class="pl-qr-note">WhatsApp us</div>
+      </div>
+      <div class="pl-rsvp-opt">
+        <div class="pl-rsvp-opt-title">&#9790; NIGHT OUT</div>
+        <div class="pl-rsvp-opt-body">Part II only<br>From sunset</div>
+        <div class="pl-qr-note">WhatsApp us</div>
+      </div>
+      <div class="pl-rsvp-opt">
+        <div class="pl-rsvp-opt-title">&#9646; BOTH</div>
+        <div class="pl-rsvp-opt-body">Correct choice<br>No further comment</div>
+        <div class="pl-qr-note">WhatsApp us</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="pl-footer">
+    <span class="pl-footer-item corner-mark">&#9632; &#9632; &#9632;</span>
+    <span class="pl-footer-item">JUNE 15, 2026 &mdash; LISBON</span>
+    <span class="pl-footer-item amber">NO GIFTS &mdash; NO EXCEPTIONS &mdash; NO</span>
+    <span class="pl-footer-item">MANAS &amp; KYRA</span>
+    <span class="pl-footer-item corner-mark">&#9632; &#9632; &#9632;</span>
+  </div>
+
+</div>
+
+<script>
+// ── CLOCK ──
+function tick() {
+  document.getElementById('mb-clock').textContent =
+    new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+}
+tick(); setInterval(tick, 1000);
+
+// ── COUNTDOWN ──
+let partyTriggered = false;
+function updateCountdown() {
+  const target = new Date('2026-06-15T12:00:00');
+  const diff = target - Date.now();
+  if (diff <= 0) {
+    document.getElementById('cd').textContent = '00 : 00 : 00 : 00';
+    if (!partyTriggered) { partyTriggered = true; document.getElementById('party-on').classList.add('show'); }
+    return;
+  }
+  const d = Math.floor(diff/86400000), h = Math.floor((diff%86400000)/3600000),
+        m = Math.floor((diff%3600000)/60000), s = Math.floor((diff%60000)/1000);
+  const p = n => String(n).padStart(2,'0');
+  document.getElementById('cd').textContent = `${p(d)} : ${p(h)} : ${p(m)} : ${p(s)}`;
+}
+updateCountdown(); setInterval(updateCountdown, 1000);
+
+// ── POPUPS ──
+function openPopup(id)  { document.getElementById(id).classList.add('open'); }
+function closePopup(id) { document.getElementById(id).classList.remove('open'); }
+
+// ── MENUS ──
+function toggleMenu(id) {
+  const isOpen = document.getElementById(id).classList.contains('open');
+  closeAllMenus();
+  if (!isOpen) document.getElementById(id).classList.add('open');
+}
+function closeAllMenus() {
+  document.querySelectorAll('.mb-menu').forEach(m => m.classList.remove('open'));
+}
+document.addEventListener('click', e => {
+  if (!e.target.closest('.mb-menu') && !e.target.closest('.mb-apple')) closeAllMenus();
+});
+
+// ── MINIMIZE ──
+function toggleWin(btn) {
+  const win = btn.closest('.mac-window');
+  const bar = win.querySelector('.mac-titlebar');
+  Array.from(win.children).forEach(el => {
+    if (el !== bar) el.style.display = el.style.display === 'none' ? '' : 'none';
+  });
+}
+
+// ── GOOGLE CALENDAR ──
+function addToCalendar() {
+  const base   = 'https://calendar.google.com/calendar/render?action=TEMPLATE';
+  const title  = encodeURIComponent('Manas & Kyra Birthday Party 🎂');
+  const dates  = '20260615T120000/20260616T000000';
+  const loc    = encodeURIComponent('Lisbon, Portugal');
+  const detail = encodeURIComponent('Part I: Beach & Cooler Lime from noon.\nPart II: Sunset & Night Out.\nLocation TBA — check WhatsApp for the pin.\nNo gifts.');
+  window.open(`${base}&text=${title}&dates=${dates}&location=${loc}&details=${detail}`, '_blank');
+}
+
+// ── HTTP.CAT RAIN ──
+// A curated set of fun/relevant HTTP status codes from https://http.cat/
+const HTTP_CODES = [
+  100, 101, 200, 201, 202, 204,
+  206, 301, 302, 304, 307, 308,
+  400, 401, 402, 403, 404, 405,
+  408, 409, 410, 418, 420, 422,
+  425, 429, 451, 500, 501, 502,
+  503, 504, 506, 508, 509, 511
+];
+
+let catRaining = false;
+
+function rainCats() {
+  if (catRaining) return;
+  catRaining = true;
+
+  // Cover the screen with a grid of http.cat images
+  const W = window.innerWidth;
+  const H = window.innerHeight;
+
+  // Tile size: roughly 160x120 so we fill the screen densely
+  const tileW = Math.max(100, Math.floor(W / 5));
+  const tileH = Math.floor(tileW * 0.75);
+  const cols = Math.ceil(W / tileW) + 1;
+  const rows = Math.ceil(H / tileH) + 1;
+  const total = cols * rows;
+
+  // Shuffle codes to ensure variety
+  const shuffled = [...HTTP_CODES].sort(() => Math.random() - 0.5);
+  const tiles = [];
+
+  for (let i = 0; i < total; i++) {
+    const code = shuffled[i % shuffled.length];
+    const col  = i % cols;
+    const row  = Math.floor(i / cols);
+
+    const img = document.createElement('img');
+    img.className = 'cat-img-tile';
+    img.src = `https://http.cat/${code}`;
+    img.alt = `${code}`;
+    img.loading = 'eager';
+
+    // Final resting position (covers screen in a grid)
+    const finalX = col * tileW - (tileW * 0.1);
+    const finalY = row * tileH - (tileH * 0.1);
+
+    // Random start offset and tilt
+    const r1 = (Math.random() * 20 - 10).toFixed(1) + 'deg';
+    const r2 = (Math.random() * 8 - 4).toFixed(1) + 'deg';
+    const delay = (Math.random() * 0.8).toFixed(2);
+    const dur   = (0.6 + Math.random() * 0.8).toFixed(2);
+
+    img.style.cssText = `
+      width:${tileW}px; height:${tileH}px;
+      left:${finalX}px;
+      top:${finalY}px;
+      --r1:${r1}; --r2:${r2};
+      animation-duration:${dur}s;
+      animation-delay:${delay}s;
+      opacity:0;
+    `;
+
+    // Override animation to be position-based (appear and stay)
+    img.style.animation = `none`;
+    img.style.opacity = '0';
+    img.style.transform = `rotate(${r1})`;
+    img.style.transition = `opacity 0.3s ease, transform 0.4s ease`;
+
+    document.body.appendChild(img);
+    tiles.push(img);
+
+    // Trigger appearance with stagger
+    setTimeout(() => {
+      img.style.opacity = '1';
+      img.style.transform = `rotate(${r2})`;
+    }, parseFloat(delay) * 1000 + 50);
+  }
+
+  // Remove after 5 seconds
+  setTimeout(() => {
+    tiles.forEach((img, i) => {
+      setTimeout(() => {
+        img.style.opacity = '0';
+        img.style.transform = `rotate(${(Math.random()*40-20).toFixed(1)}deg) scale(0.8)`;
+        setTimeout(() => img.remove(), 400);
+      }, i * 8);
+    });
+    setTimeout(() => { catRaining = false; }, tiles.length * 8 + 500);
+  }, 5000);
+}
+
+// ── DELAYED REMINDER ──
+setTimeout(() => openPopup('p-reminder'), 12000);
+</script>
+</body>
+</html>
