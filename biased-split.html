@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>👽 BIASED SPLIT 👽</title>
+  <style>
+    body {
+      background: url('https://cyber.dabamos.de/bg/alien1.gif') repeat;
+      color: lime;
+      font-family: "Comic Sans MS", cursive;
+      text-align: center;
+      cursor: crosshair;
+      overflow-x: hidden;
+    }
+    h1 {
+      font-size: 6vw;
+      text-shadow: 10px 10px 0px blue;
+      animation: rainbow 0.1s infinite;
+      margin: 0;
+    }
+    @keyframes rainbow {
+      0% { color: red; transform: skewX(10deg); }
+      33% { color: yellow; transform: skewX(-10deg); }
+      66% { color: fuchsia; transform: scale(1.2); }
+      100% { color: cyan; transform: scale(0.8); }
+    }
+    .wacky-box {
+      background: black;
+      border: 15px ridge magenta;
+      display: inline-block;
+      padding: 20px;
+      margin-top: 20px;
+      font-size: 2em;
+      border-radius: 40px;
+      box-shadow: 0 0 100px lime;
+    }
+    .tbd {
+      display: inline-block;
+      background: yellow;
+      color: red;
+      padding: 5px;
+      font-weight: bold;
+      animation: spinny 0.5s infinite linear;
+    }
+    @keyframes spinny { 100% { transform: rotate(360deg) scale(1.5); } }
+    .btn {
+      font-size: 3em;
+      background: fuchsia;
+      color: yellow;
+      border: 15px dotted lime;
+      padding: 10px 30px;
+      text-decoration: none;
+      display: inline-block;
+      animation: bounce 0.3s infinite alternate;
+    }
+    @keyframes bounce { 100% { transform: translateY(-30px); } }
+    .fly-dvd {
+      position: absolute;
+      font-size: 2em;
+      background: blue;
+      color: white;
+      padding: 10px;
+      border: 5px solid white;
+    }
+  </style>
+</head>
+<body>
+
+  <marquee behavior="alternate" scrollamount="35" style="position:fixed; top:10%; height:80vh; z-index:-1;">
+    <marquee behavior="alternate" direction="down" scrollamount="30" class="fly-dvd">
+      "Could be Useful" - Dr. Martin Šícho <br>
+      "What ?" - MY MOM;
+    </marquee>
+  </marquee>
+
+  <h1>BIASED SPLIT</h1>
+
+  <marquee behavior="alternate" scrollamount="100" width="50%">
+    <a href="https://github.com/Manas02/biased-split" class="btn">
+      💾 CODE HERE 💾
+    </a>
+  </marquee>
+
+  <br>
+
+  <div class="wacky-box">
+    <b>CODE:</b> ✅ DONE<br><br>
+    <b>DOCS:</b> <div class="tbd">🚧 TBD 🚧</div><br><br>
+    <b>BENCHMARKS:</b> <div class="tbd">🚧 TBD 🚧</div><br><br>
+    <b>MANUSCRIPT:</b> <div class="tbd">🚧 TBD 🚧</div>
+  </div>
+
+</body>
+</html>
