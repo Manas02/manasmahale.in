@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Are you the one ? -- Manas Mahale</title>
+    <link rel="icon" type="image/x-icon" href="https://manasmahale.in/assets/doggo.ico?v=1">
+    <link rel="icon" type="image/jpeg" href="https://manasmahale.in/assets/doggo.jpeg?v=1">
+    <meta property="og:image" content="https://manasmahale.in/assets/doggo.jpeg?v=1">
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500&display=swap');
+
+        :root {
+            --bg: #F5F4EF;
+            --ink: #111111;
+            --subtle: #888888;
+            --accent: #D93025; /* Editorial Red */
+            --border: #E0E0E0;
+        }
+
+        /* --- Selection Styling --- */
+        ::selection { background: var(--accent); color: var(--bg); }
+        ::-moz-selection { background: var(--accent); color: var(--bg); }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; cursor: default; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--ink);
+            min-height: 100vh;
+            width: 100vw;
+            font-family: 'Instrument Serif', serif;
+            padding: 4rem;
+            overflow-x: hidden;
+            line-height: 1.4;
+        }
+
+        /* --- Navigation --- */
+        nav {
+            position: absolute;
+            top: 4rem;
+            left: 4rem;
+            z-index: 10;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: var(--subtle);
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+            cursor: pointer;
+            border: none;
+            background: none;
+            padding: 0;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+            font-style: italic;
+        }
+
+        /* --- Main Layout --- */
+        .dossier {
+            max-width: 900px;
+            margin: 0 auto;
+            padding-top: 4rem;
+        }
+
+        /* --- Header --- */
+        header {
+            margin-bottom: 4rem;
+            border-bottom: 2px solid var(--ink);
+            padding-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 400;
+            line-height: 0.9;
+            margin-bottom: 1rem;
+            color: var(--ink);
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.9rem;
+            color: var(--subtle);
+            margin-top: 2rem;
+        }
+
+        .meta-item strong {
+            display: block;
+            color: var(--ink);
+            font-weight: 500;
+            margin-bottom: 0.2rem;
+        }
+
+        .status-pill {
+            display: inline-block;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 0.2rem 0.6rem;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .status-pill:hover {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        /* --- Sections (Ledger Style) --- */
+        .section {
+            display: grid;
+            grid-template-columns: 200px 1fr; /* Label | Content */
+            gap: 2rem;
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-label {
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--subtle);
+            position: sticky;
+            top: 2rem;
+        }
+
+        .section-content {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--ink);
+        }
+
+        .section-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight {
+            font-style: italic;
+            border-bottom: 1px solid var(--accent);
+        }
+
+        /* --- Media Grids --- */
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 1rem;
+        }
+
+        .media-grid video {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 9/16;
+            object-fit: cover;
+            border: 1px solid var(--border);
+            /* Grayscale until hover for that 'document' feel? Optional. */
+            /* filter: grayscale(100%); */
+            transition: filter 0.3s ease;
+        }
+        /* .media-grid video:hover { filter: grayscale(0%); } */
+
+        /* --- Spoiler Section --- */
+        .spoiler-container {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            border: 1px solid var(--ink);
+        }
+
+        .spoiler-warning {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg);
+            /* Pattern to look like security paper */
+            background-image: radial-gradient(var(--subtle) 1px, transparent 1px);
+            background-size: 10px 10px;
+            color: var(--ink);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 10;
+            transition: opacity 0.5s ease;
+        }
+
+        .spoiler-warning p {
+            background: var(--ink);
+            color: var(--bg);
+            padding: 0.5rem 1rem;
+            font-family: 'Instrument Sans', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.8rem;
+        }
+
+        .spoiler-container.revealed .spoiler-warning {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .featured-image {
+            width: 100%;
+            display: block;
+        }
+
+        .flying-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            color: var(--accent);
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            white-space: nowrap;
+            pointer-events: none;
+            opacity: 0;
+            animation: flyOut 2s ease-out forwards;
+        }
+
+        @keyframes flyOut {
+            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
+            100% { transform: translate(var(--x-end), var(--y-end)) scale(1.2); opacity: 0; }
+        }
+
+        /* --- Video with Sound --- */
+        .video-container-with-sound {
+            position: relative;
+            cursor: pointer;
+            width: 100%;
+            border: 1px solid var(--border);
+        }
+
+        .video-container-with-sound video {
+            width: 100%;
+            display: block;
+        }
+
+        .unmute-label {
+            margin-top: 0.5rem;
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.8rem;
+            color: var(--accent);
+            text-align: right;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* --- Buttons & Interactives --- */
+        .cta-container {
+            margin-top: 2rem;
+            text-align: left;
+        }
+
+        .apply-button {
+            display: inline-block;
+            background: var(--ink);
+            color: var(--bg);
+            padding: 1rem 2rem;
+            font-family: 'Instrument Sans', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.9rem;
+            text-decoration: none;
+            border: 1px solid var(--ink);
+            transition: all 0.3s ease;
+        }
+
+        .apply-button:hover {
+            background: transparent;
+            color: var(--ink);
+        }
+
+        .referral-box {
+            background: #fff;
+            border: 1px solid var(--border);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .fun-fact {
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 1rem;
+            color: var(--subtle);
+            border-left: 2px solid var(--accent);
+            padding-left: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .footer-section {
+            background: #EAE8E0;
+            padding: 5rem 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid var(--ink);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Equal columns */
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* The "Paper Card" Look */
+        .footer-card {
+            background: #FFFFFF;
+            border: 1px solid var(--ink);
+            padding: 3rem 2rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* subtle lift effect on hover */
+        .footer-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.05);
+        }
+
+        .footer-card h3 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            font-style: italic; /* Adds that 'handwritten note' feel */
+        }
+
+        .footer-card p {
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.95rem;
+            color: var(--subtle);
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        /* Specific button styling for the footer */
+        .action-btn {
+            width: 100%;
+            padding: 1rem;
+            background: transparent;
+            color: var(--ink);
+            border: 1px solid var(--ink);
+            font-family: 'Instrument Sans', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.9rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-block;
+        }
+
+        .action-btn:hover {
+            background: var(--ink);
+            color: var(--bg);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr; /* Stack them */
+                gap: 1.5rem;
+            }
+            .footer-section {
+                padding: 3rem 1.5rem;
+            }
+        }
+                /* --- Mobile --- */
+                @media (max-width: 768px) {
+                    body { padding: 2rem; }
+                    nav { position: static; margin-bottom: 2rem; }
+                    .dossier { padding-top: 0; }
+                    .section { grid-template-columns: 1fr; gap: 1rem; padding: 2rem 0;}
+                    .section-label { position: static; color: var(--accent); }
+                    .section-content { font-size: 1.3rem; }
+                    .meta-grid { grid-template-columns: 1fr; gap: 1.5rem;}
+                    .media-grid { grid-template-columns: 1fr; }
+                    h1 { font-size: 3.5rem; }
+                }
+            </style>
+
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-TSDKY5VGKJ"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-TSDKY5VGKJ');
+            </script>
+        </head>
+        <body>
+
+    <nav>
+        <a href="https://manasmahale.in" class="back-link">← Return to Index</a>
+    </nav>
+
+    <div class="dossier">
+
+        <header>
+            <h1>ARE YOU THE ONE?</h1>
+
+            <div class="meta-grid">
+                <div class="meta-item">
+                    <strong>Candidate Status</strong>
+                    <span class="status-pill">Accepting Applications</span>
+                </div>
+                <div class="meta-item">
+                    <strong>Specifications</strong>
+                    24 Years / Human Male
+                </div>
+                <div class="meta-item">
+                    <strong>Objective</strong>
+                    Long-term "Research"
+                </div>
+            </div>
+        </header>
+
+        <section class="section">
+            <div class="section-label">01 // The Abstract</div>
+            <div class="section-content">
+                <p>Hi, I'm <a style="color:var(--accent)" href="https://manasmahale.in/">Manas</a>. My friends believe there is a distinct lack of human female dating partner in my life. They claim I am single because I have the time to build websites like this.</p>
+                <p>Honestly? Fair enough. I research for fun and profit, and this document is likely the strongest evidence of my recent questionable life choices.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-label">02 // Visual Exhibits</div>
+            <div class="section-content">
+                <div class="media-grid">
+                    <video autoplay loop muted playsinline src="./assets/IMG_7929.MOV"></video>
+                    <video autoplay loop muted playsinline src="./assets/IMG_7930.mov"></video>
+                    <video autoplay loop muted playsinline src="./assets/IMG_8209.MOV"></video>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-label">03 // Methodology</div>
+            <div class="section-content">
+                <p><strong>Active Pursuits:</strong> Running (because therapy is expensive), bouldering (falling with style), and recreational programming (regrettably, yes).</p>
+                <p><strong>Current Obsession:</strong> Photography. I will ask you to "walk by that window again but look slightly left."</p>
+                <p><strong>Cooking Ability:</strong> Enthusiastic amateur. I can make pasta without burning it, which I consider a win.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-label">04 // Peer Review</div>
+            <div class="section-content">
+                <p style="font-style: italic; color: var(--subtle);">
+                    "Pays rent on time. Never complains. We have a tacit understanding that our interactions will be brief. Honestly, an ideal tenant."
+                </p>
+                <p>— My Landlord</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-label">05 // Classified Data</div>
+            <div class="section-content">
+                <div id="spoiler-area" class="spoiler-container">
+                    <div class="spoiler-warning">
+                        <p>Click to Declassify</p>
+                    </div>
+                    <img src="./assets/pm.jpg" alt="A photo of me with the Prime Minister of India" class="featured-image spoiler-content">
+                </div>
+                <div style="margin-top: 1rem; font-size: 1.2rem;">
+                    "Wow, what do you research in AI?" <span style="color: var(--subtle); font-size: 1rem;">— A Very Important Person (or so I was told at that point. Any association, affiliation, or alignment with the public figure depicted herein is hereby expressly disclaimed and explicitly denied. And, now back to the joke:) We mostly discussed AI for drug discovery. He was unfortunately silent on my dating life. Can't win them all.</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-label">06 // Vocal Sample</div>
+            <div class="section-content">
+                <div class="video-container-with-sound">
+                    <video autoplay loop muted playsinline src="./assets/IMG_1032.mp4"></video>
+                </div>
+                <div class="unmute-label unmute-button">🔇 Click to Unmute</div>
+            </div>
+        </section>
+
+        <section class="section" style="border-bottom: none;">
+            <div class="section-label">07 // Conclusion</div>
+            <div class="section-content">
+                <p>My five-year plan is to become a regular at a local cafe with someone, to the point where they name a sandwich after us. It'll be called the "They're Still Together?" club.</p>
+                <p>Seeking intelligent, witty human female (23−25). Someone who can handle my emotional range, appreciate absurd humor, and won't judge me for crying during Pixar movies.</p>
+                <p><strong>The Query:</strong> What is a small, insignificant thing that brings you an unreasonable amount of joy?</p>
+
+                <div class="cta-container">
+                    <a href="mailto:manas.m.mahale@gmail.com?subject=Manas%20will%20you%20date%20me%2C%20please%2C%20pretty%20please" class="apply-button">
+                        💅🏽 Let's Talk 👉👈
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="footer-section">
+          <div class="footer-grid">
+
+            <div class="footer-card">
+              <div>
+                <div style="font-size: 2rem; margin-bottom: 1rem; opacity: 0.5;">☕</div>
+                <h3>The Auntie Network</h3>
+                <p>
+                  Life is short, and I cannot sing in the Alps alone. If you have a friend who deserves a rom-com meet-cute involving a confused researcher in Strasbourg (till Jan; then JP), do not gatekeep this link.
+                </p>
+              </div>
+              <button id="matchmakerBtn" class="action-btn">
+                Send to the Main Character
+              </button>
+            </div>
+
+            <div class="footer-card">
+              <div>
+                <div style="font-size: 2rem; margin-bottom: 1rem; opacity: 0.5;">🤝</div>
+                <h3>Platonic Tier</h3>
+                <p>
+                  If you found this fun / cool let's be friends! I promise I am significantly less intense in real life.
+                </p>
+              </div>
+              <a href="mailto:manas.m.mahale@gmail.com?subject=Cool%20website" class="action-btn">
+                Befriend this moron
+              </a>
+            </div>
+
+          </div>
+        </section>
+
+          </div>
+        </section>
+
+    </div>
+
+    <script>
+        // Status Text Cycler
+        document.addEventListener('DOMContentLoaded', function() {
+            const status = document.querySelector('.status-pill');
+            status.addEventListener('click', function() {
+                const messages = ['Still Available', 'Limited Time Offer', 'Please Apply', 'Help :('];
+                const original = status.textContent;
+                const random = messages[Math.floor(Math.random() * messages.length)];
+                status.textContent = random;
+                setTimeout(() => { status.textContent = 'Accepting Applications'; }, 2000);
+            });
+        });
+
+        // Spoiler Logic
+        document.addEventListener('DOMContentLoaded', function() {
+            const spoilerArea = document.getElementById('spoiler-area');
+            if (spoilerArea) {
+                spoilerArea.addEventListener('click', function() {
+                    if (this.classList.contains('revealed')) return;
+                    this.classList.add('revealed');
+
+                    // Animation
+                    const phrases = ['wow', 'impressive', 'much wow', 'what a guy!', 'genius'];
+                    phrases.forEach((text, index) => {
+                        const flyingText = document.createElement('span');
+                        flyingText.className = 'flying-text';
+                        flyingText.textContent = text;
+                        const xEnd = (Math.random() - 0.5) * 500 + 'px';
+                        const yEnd = (Math.random() - 0.5) * 500 + 'px';
+                        flyingText.style.setProperty('--x-end', xEnd);
+                        flyingText.style.setProperty('--y-end', yEnd);
+                        flyingText.style.animationDelay = (index * 0.15) + 's';
+                        this.appendChild(flyingText);
+                        setTimeout(() => { flyingText.remove(); }, 2500);
+                    });
+                }, { once: true });
+            }
+        });
+
+        // Matchmaker / Share Logic
+        document.addEventListener('DOMContentLoaded', function() {
+            const matchmakerButton = document.getElementById('matchmakerBtn');
+            const shareData = {
+                title: 'Haaaaave you met Manas',
+                text: 'I found this dating resume and thought of you. Do with this information what you will.',
+                url: 'https://manasmahale.in/date'
+            };
+
+            matchmakerButton.addEventListener('click', async () => {
+                if (navigator.share) {
+                    try {
+                        await navigator.share(shareData);
+                        matchmakerButton.textContent = 'Sent!';
+                    } catch (err) {}
+                } else {
+                    try {
+                        await navigator.clipboard.writeText(`${shareData.text} ${shareData.url}`);
+                        matchmakerButton.textContent = 'Link Copied';
+                    } catch (err) {}
+                }
+                setTimeout(() => { matchmakerButton.textContent = 'share'; }, 2000);
+            });
+        });
+
+        // Sound Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const soundContainer = document.querySelector('.video-container-with-sound');
+            if (soundContainer) {
+                const video = soundContainer.querySelector('video');
+                const label = document.querySelector('.unmute-label');
+
+                soundContainer.addEventListener('click', () => {
+                    if (video.muted) {
+                        video.muted = false;
+                        label.textContent = '🔊 Sound Active';
+                    } else {
+                        video.muted = true;
+                        label.textContent = '🔇 Click to Unmute';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
